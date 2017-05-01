@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Shell.h"
 
-Class Command : public Shell {
+class Command : public Shell {
 private:
     char* cmd[];
 public:

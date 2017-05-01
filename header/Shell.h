@@ -2,9 +2,10 @@
 #define SHELL_H
 
 #include <vector>
-using namspace std;
 
-Class Shell {
+using namespace std;
+
+class Shell {
 protected:
 	vector<Shell*> cmdLine;
 public:
