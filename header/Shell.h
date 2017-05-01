@@ -1,8 +1,17 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-Class Shell {
+#include <vector>
+using namspace std;
 
+Class Shell {
+protected:
+	vector<Shell*> cmdLine;
+public:
+	Shell();
+	void read();
+	void parse();
+	virtual void execute = 0;
 };
 
 #endif 
