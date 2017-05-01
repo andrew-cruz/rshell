@@ -9,7 +9,6 @@ Command::Command() {
 }
 
 void Command::parse() {
-
 }
 
 void Command::read() {
@@ -17,5 +16,4 @@ void Command::read() {
 }
 
 void Command::execute() {
-
 }

@@ -11,7 +11,7 @@ protected:
 public:
 	Shell();
 	void read();
-	void parse();
+	virtual void parse();
 	virtual void execute() = 0;
 };
 

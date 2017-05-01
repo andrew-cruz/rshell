@@ -11,9 +11,16 @@ Shell::Shell(){
 void Shell::read(){
 	string cmd; 
 
+	cout << "Assn2$ ";
 	getline(cin, cmd);
+
+	while(cmd != "exit"){
+		parse();
+		execute();
+		cout << "Assn2$ ";
+		getline(cin,cmd);
+	}
+
 }
 
-void Shell::parse(){
-
-}
+void Shell::parse(){}
