@@ -11,7 +11,7 @@ public:
 	Shell();
 	void read();
 	void parse();
-	virtual void execute = 0;
+	virtual void execute() = 0;
 };
 
-#endif 
+#endif
