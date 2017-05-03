@@ -5,7 +5,6 @@ private:
     char* cmd[];
 */
 Command::Command() {
-
 }
 
 void Command::parse() {
