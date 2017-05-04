@@ -1,4 +1,4 @@
-#include "Command.h"
+#include "../header/Command.h"
 
 /*
 private:
@@ -8,14 +8,39 @@ Command::Command() {
 }
 
 void Command::parse() {
+	Shell* newCmd = new Command();
+	int i;
 
-	Char* cmd = new Command();
+	for( i= 0; i < command.length(); i++){
+		if(command.at(i) == ';'){
+			cout << "end of command\n";
+		}
+		else{
+			newCmd->setCmd(i,command.at(i));
+		}
+	}
 
-	for(int)
+	
+	newCmd->setCmd(i,'\0');
+	
+	newCmd->printCmd();
+
+	cout << "End of all commands\n";
+}
+
+void Command::setCmd(int index, char value){
+	cmd[index] = value;
 }
 
 void Command::read() {
 
+}
+
+void Command::printCmd(){
+	cout << "Print fcn";
+	for(int i = 0; cmd[i] != '\0'; ++i){
+		cout << cmd[i];
+	}
 }
 
 void Command::execute() {
