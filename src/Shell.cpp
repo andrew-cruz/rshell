@@ -5,7 +5,6 @@
 using namespace std;
 
 Shell::Shell(){
-	
 }
 
 void Shell::read(){
@@ -16,12 +15,4 @@ void Shell::read(){
 }
 
 void Shell::parse(){
-	// cout << "SHell Parse;";
-}
-
-void Shell::setCmd(int,char){
-
-}
-
-void Shell::printCmd(){
 }

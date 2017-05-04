@@ -1,8 +1,9 @@
 #include "../header/Command.h"
-#include <cstdlib>
 #include "unistd.h"
 #include "sys/types.h"
+#include <cstdlib>
 #include <sys/wait.h>
+#include <string>
 
 /*
 private:
@@ -12,39 +13,19 @@ Command::Command() {
 }
 
 void Command::parse() {
-	Shell* newCmd = new Command();
-	int i;
-
-	for( i= 0; i < command.length(); i++){
-		if(command.at(i) == ';'){
-			cout << "end of command\n";
-		}
-		else{
-			newCmd->setCmd(i,command.at(i));
-		}
-	}
-
-	
-	newCmd->setCmd(i,'\0');
-	
-	newCmd->printCmd();
-
-	cout << "End of all commands\n";
-}
-
-void Command::setCmd(int index, char value){
-	cmd[index] = value;
+    for(int i = 0; i < command.length(); ++i){
+        if(command.at(i) == ';'){
+            cmdLine.push_back(this);
+            cmd = new char[];
+        }
+        else{
+            cmd[i] = command.at(i);
+        }
+    }
 }
 
 void Command::read() {
 
-}
-
-void Command::printCmd(){
-	cout << "Print fcn";
-	for(int i = 0; cmd[i] != '\0'; ++i){
-		cout << cmd[i];
-	}
 }
 
 void Command::execute() {
@@ -62,22 +43,22 @@ void Command::execute() {
         process group ID is equal to the absolute value of pid.
     */
 
-        pid_t pid; //integer type which is capable of representing a process ID
-        int status;
+        // pid_t pid; //integer type which is capable of representing a process ID
+        // int status;
 
-        if ((pid = fork()) < 0) {     //fork a child process
-             printf("*** ERROR: forking child process failed\n");
-             exit(1);
-        }
-        else if (pid == 0) {          //for the child process:
-         if (execvp(*cmd, cmd) < 0) {     // execute the command
-                  printf("*** ERROR: exec failed\n");
-                  exit(1);
-             }
-        }
-        else {                                  // for the parent:
-             while (waitpid(-1, &status, 0) != pid)       /// wait for completion
-                  ;
-        }
+        // if ((pid = fork()) < 0) {     //fork a child process
+        //      printf("*** ERROR: forking child process failed\n");
+        //      exit(1);
+        // }
+        // else if (pid == 0) {          //for the child process:
+        //  if (execvp(*cmd, cmd) < 0) {     // execute the command
+        //           printf("*** ERROR: exec failed\n");
+        //           exit(1);
+        //      }
+        // }
+        // else {                                  // for the parent:
+        //      while (waitpid(-1, &status, 0) != pid)       /// wait for completion
+        //           ;
+        // }
 
 }
