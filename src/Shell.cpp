@@ -21,6 +21,7 @@ void Shell::read(){
 		getline(cin,cmd);
 	}
 
+	this->cmd = cmd;
 }
 
 void Shell::parse(){}
