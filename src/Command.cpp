@@ -13,15 +13,25 @@ Command::Command() {
 }
 
 void Command::parse() {
-    for(int i = 0; i < command.length(); ++i){
-        if(command.at(i) == ';'){
-            cmdLine.push_back(this);
-            cmd = new char[];
-        }
-        else{
-            cmd[i] = command.at(i);
-        }
-    }
+    // Command* a = new Command();
+
+    // int j = 0;
+    // for(int i = 0; i < command.length(); ++i){
+    //     if(command.at(i) == ';'){
+    //         a->cmd.push_back('\0');
+    //         cmdLine.push_back(a);
+    //         j = 0;
+    //     }
+    //     else{
+    //         a->cmd.push_back(command.at(i));
+    //         j++;
+    //     }
+    // }
+
+    // a->cmd.push_back('\0');
+    //         cmdLine.push_back(a);
+
+    // Shell::print();
 }
 
 void Command::read() {
