@@ -13,32 +13,22 @@ Command::Command() {
 }
 
 void Command::parse() {
-    // Command* a = new Command();
-
-    // int j = 0;
     // for(int i = 0; i < command.length(); ++i){
     //     if(command.at(i) == ';'){
-    //         a->cmd.push_back('\0');
-    //         cmdLine.push_back(a);
-    //         j = 0;
+    //         cmdLine.push_back(this);
+    //         cmd = new char[];
     //     }
     //     else{
-    //         a->cmd.push_back(command.at(i));
-    //         j++;
+    //         cmd[i] = command.at(i);
     //     }
     // }
-
-    // a->cmd.push_back('\0');
-    //         cmdLine.push_back(a);
-
-    // Shell::print();
 }
 
 void Command::read() {
 
 }
 
-void Command::execute() {
+void Command::execute(char cmd[]) {
     //use fork, execvp, and waitpid
     //must have a special built-in command of exit which exits your shell.
     // # character should be considered a comment.
@@ -52,23 +42,28 @@ void Command::execute() {
     .If pid is less than -1, waitpid() waits for the termination of any child whose
         process group ID is equal to the absolute value of pid.
     */
-
-        // pid_t pid; //integer type which is capable of representing a process ID
-        // int status;
-
-        // if ((pid = fork()) < 0) {     //fork a child process
-        //      printf("*** ERROR: forking child process failed\n");
-        //      exit(1);
-        // }
-        // else if (pid == 0) {          //for the child process:
-        //  if (execvp(*cmd, cmd) < 0) {     // execute the command
-        //           printf("*** ERROR: exec failed\n");
-        //           exit(1);
-        //      }
-        // }
-        // else {                                  // for the parent:
-        //      while (waitpid(-1, &status, 0) != pid)       /// wait for completion
-        //           ;
-        // }
-
+        pid_t pid; //integer type which is capable of representing a process ID
+        int status;
+        cout << "cmd: " << cmd << endl;
+        //fork() makes a clone of the process you're currently in
+            //good for things to work simultaneously
+        if ((pid = fork()) < 0) {     //fork a child process
+             printf("*** ERROR: forking child process failed\n");
+             exit(1);
+        }
+        else if (pid == 0) {
+            cout << "1. pid == 0! You're in the child process!\n";        // the child process:
+                 if (execvp(cmd, &cmd) < 0) {     // execute the command
+                  printf("*** ERROR: exec failed\n");
+                  exit(1);
+             }
+        }
+        else {
+            cout << "2. pid > 0! you're in the parent process!\n";// the parent process:
+             while (waitpid(-1, &status, 0) != pid) {
+                 //parent waits until child is killed
+             cout << "3\n";      /// wait for completion
+             //;
+         }
+        }
 }
