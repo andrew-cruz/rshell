@@ -15,7 +15,7 @@ Command::Command() {
 }
 
 void Command::parse() {
-    for(int i = 0; i < line.length(); ++i){
+    for(unsigned i = 0; i < line.length(); ++i){
         commandLine[i] = line.at(i);
     }
 
@@ -38,7 +38,6 @@ void Command::read() {
 }
 
 void Command::execute() {
-    cout << "EXECUTE..........\n";
      pid_t  pid;
      int    status;
      
