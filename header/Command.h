@@ -2,11 +2,12 @@
 #define COMMAND_H
 
 #include <iostream>
+#include <vector>
 #include "Shell.h"
 
 class Command : public Shell {
-private:
-    char* cmd[];
+protected:
+	
 public:
     Command();
     void parse();
