@@ -1,24 +1,25 @@
 #include "../header/Command.h"
-#include  <stdio.h>
-#include  <sys/types.h>
-#include <string>
-#include <string.h>
-#include <cstdlib>
+// #include  <stdio.h>
+// #include  <sys/types.h>
+// #include <string>
+// #include <string.h>
+// #include <cstdlib>
 #include "unistd.h"
-#include "sys/types.h"
-#include <sys/wait.h>
-#include <iostream>
+// #include "sys/types.h"
+// #include <sys/wait.h>
+// #include <iostream>
 
 using namespace std;
 
-Command::Command() {
-}
+Command::Command() {}
 
 void Command::parse() {
+    //Assignes the vector commandline input to a char array
     for(unsigned i = 0; i < line.length(); ++i){
         commandLine[i] = line.at(i);
     }
 
+    //Used to get each 
     char* token = strtok(commandLine, " ;");
     
     int i = 0;
@@ -33,9 +34,7 @@ void Command::parse() {
     }
 }
 
-void Command::read() {
-
-}
+void Command::read() {}
 
 void Command::execute() {
      pid_t  pid;
