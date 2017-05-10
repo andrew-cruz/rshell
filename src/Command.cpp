@@ -124,6 +124,7 @@ void Command::parse() {
     // //Prints out what is inside of each index of cmd
     // for(int i = 0; i < numCmd; i++){
     //     cout << "Cmd at " << i << " is "<< cmd[i] << endl;
+
     // }
 
 
@@ -280,6 +281,7 @@ void Command::parse() {
 void Command::read() {}
 
 void Command::execute() {
+
     //     char a[10] = "echo";
     //     char b[10] = "hi";
     //     //;
@@ -322,3 +324,4 @@ void Command::execute() {
              }
     }
 }
+

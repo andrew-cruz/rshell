@@ -12,22 +12,22 @@ Shell::Shell(){
 void Shell::read(){
 	bool leave = false;
 
-	while(!leave){
-		
+	while(!leave) {
+
 		Shell* a = new Command();
-		
-		cout << "Assn2$ ";
-		
+
+		cout << "$ ";
+
 		getline(cin, a->line);
-		
+
 		if(a->line == "exit")
 			break;
-		
+
 		a->parse();
 		a->execute();
 	}
 }
 
-void Shell::parse(){}
+void Shell::parse() {}
 
-void Shell::print(){}
+void Shell::print() {}
