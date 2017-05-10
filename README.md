@@ -8,13 +8,13 @@ single command line at a time of with n number of arguments. It then executes th
 
 
 ### Rubric
->5 points for well commented code
->5 points for following style guidelines
->20 points for sufficient test cases
->20 points for executing single commands
->20 points for executing commands with ;, &&, and ||
->20 points for executing commands with comments
->10 points for exit commands
+5 points for well commented code
+5 points for following style guidelines
+20 points for sufficient test cases
+20 points for executing single commands
+20 points for executing commands with ;, &&, and ||
+20 points for executing commands with comments
+10 points for exit commands
 
 
 ## Authors
