@@ -146,45 +146,45 @@ void Command::parse() {
 
 
 
-    char* cmd[100];
-    char commandLine[1000];
-    // Assignes the vector commandline input to a char array
-    for(unsigned i = 0; i < line.length(); ++i){
-        commandLine[i] = line.at(i);
-    }
+    // char* cmd[100];
+    // char commandLine[1000];
+    // // Assignes the vector commandline input to a char array
+    // for(unsigned i = 0; i < line.length(); ++i){
+    //     commandLine[i] = line.at(i);
+    // }
 
-    //Used to get each for char array up to space or semicolon
-    char* token = strtok(commandLine, " ;");
+    // //Used to get each for char array up to space or semicolon
+    // char* token = strtok(commandLine, " ;");
 
-    //Used to iteate through cmd array
-    int i = 0;
+    // //Used to iteate through cmd array
+    // int i = 0;
 
-    //While token is not empty
-    while(token != NULL){
+    // //While token is not empty
+    // while(token != NULL){
 
-        //Dynamically reallocte size of cmd array at index i to size of token pointer
-        cmd[i] = (char*) malloc(strlen(token) + 1);
-        //Copies token into command at index i
-        strcpy(cmd[i], token);
-        //Sets token to next char string that is seperated by space or semicolon
-        token = strtok(NULL, " ;");
-        //Increment counter
-        i++;
-    }
+    //     //Dynamically reallocte size of cmd array at index i to size of token pointer
+    //     cmd[i] = (char*) malloc(strlen(token) + 1);
+    //     //Copies token into command at index i
+    //     strcpy(cmd[i], token);
+    //     //Sets token to next char string that is seperated by space or semicolon
+    //     token = strtok(NULL, " ;");
+    //     //Increment counter
+    //     i++;
+    // }
 
-    cmd[i] = NULL;
+    // cmd[i] = NULL;
 
-    for(int j = 0; cmd[j] != NULL; j++)
-            cout << "*cmd[" << j << "] is " << cmd[j] << endl;
+    // for(int j = 0; cmd[j] != NULL; j++)
+    //         cout << "*cmd[" << j << "] is " << cmd[j] << endl;
 
-    //cmd[i] = NULL;
+    // //cmd[i] = NULL;
 
 
 
-    cmdArg[0] = {cmd[0]};
-    cmdArg[1] = {cmd[1],cmd[2]};
-    cmdArg[2] = {cmd[3],cmd[4]};
-    cmdArg[3] = {cmd[5],cmd[6]};
+    // cmdArg[0] = {cmd[0]};
+    // cmdArg[1] = {cmd[1],cmd[2]};
+    // cmdArg[2] = {cmd[3],cmd[4]};
+    // cmdArg[3] = {cmd[5],cmd[6]};
 
 
 
@@ -276,6 +276,29 @@ void Command::parse() {
 
 */
 
+
+    //THIS WORKS FOR SINGLE COMMANDS ONLY
+
+    //Assignes the vector commandline input to a char array
+      for(unsigned i = 0; i < line.length(); ++i){
+          commandLine[i] = line.at(i);
+      }
+  
+    //Used to get each 
+      char* token = strtok(commandLine, " ;");
+      
+      int i = 0;
+ 
+     while(token != NULL){
+ 
+         cmd[i] = (char*) malloc(strlen(token) + 1);
+         strcpy(cmd[i], token);
+ 
+         token = strtok(NULL, " ");
+         i++;
+      }
+  
+
 }
 
 void Command::read() {}
@@ -302,7 +325,7 @@ void Command::execute() {
     //     char** test[20] = {cmd1, cmd2,cmd3};
 
 
-    for(int i = 0; i < 3; i++){
+    // for(int i = 0; i < 3; i++){
              pid_t  pid;
              int    status;
              
@@ -312,7 +335,7 @@ void Command::execute() {
              }
              else if (pid == 0) { 
                /* for the child process:         */
-                  if (execvp(cmdArg[i][0], cmdArg[i]) < 0) {     /* execute the command  */
+                  if (execvp(cmd[0], cmd) < 0) {     /* execute the command  */
                        printf("*** ERROR: exec failed\n");
                        exit(1);
                   }
@@ -322,6 +345,6 @@ void Command::execute() {
                   while (waitpid(-1, &status, 0) != pid)       /* wait for completion  */
                      cout << "WAITING....\n"  ;
              }
-    }
+    // }
 }
 
