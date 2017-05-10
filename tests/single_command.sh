@@ -1,5 +1,4 @@
 #!/bin/sh
-cd ..
 make clean; make; ./rshell
 ls -l
 echo hello
