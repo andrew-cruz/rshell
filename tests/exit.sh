@@ -1,5 +1,6 @@
 #!/bin/sh
-make clean; make; ./rshell
+cd ..
+make; bin/rshell
 echo hi
 pwd
 ls -a
