@@ -22,7 +22,7 @@ void Command::parse() {
 
     // //Used to get each for char array up to space or semicolon
     // char* token = strtok(commandLine, " ;");
-        
+
     // //Used to iteate through cmd array
     // int i = 0;
 
@@ -31,7 +31,7 @@ void Command::parse() {
 
     //     //Dynamically reallocte size of cmd array at index i to size of token pointer
     //     cmd[i] = (char*) malloc(strlen(token) + 1);
-    //     //Copies token into command at index i 
+    //     //Copies token into command at index i
     //     strcpy(cmd[i], token);
     //     //Sets token to next char string that is seperated by space or semicolon
     //     token = strtok(NULL, " ;");
@@ -56,33 +56,32 @@ void Command::execute() {
 
 
 
-        char* cmd1[20] = {a,b, NULL};
-        char* cmd2[20] = {c,d, NULL};
-        char* cmd3[20] = {e,f,g,h, NULL};
+        char* cmd1[20] = {a, b, NULL};
+        char* cmd2[20] = {c, d, NULL};
+        char* cmd3[20] = {e, f, g, h, NULL};
 
-        char** test[20] = {cmd1, cmd2,cmd3};
+        char** test[20] = {cmd1, cmd2, cmd3};
 
 
-for(int i = 0; i < 3; i++){
+    for (int i = 0; i < 3; i++){
 
-         pid_t  pid;
-         int    status;
-         
-         if ((pid = fork()) < 0) {     /* fork a child process           */
-              printf("*** ERROR: forking child process failed\n");
-              exit(1);
-         }
-         else if (pid == 0) { 
-           /* for the child process:         */
-              if (execvp(test[i][0], test[i]) < 0) {     /* execute the command  */
-                   printf("*** ERROR: exec failed\n");
-                   exit(1);
-              }
-         }
-         else {   
-                          /* for the parent:      */
-              while (waitpid(-1, &status, 0) != pid)       /* wait for completion  */
-                 cout << "WAITING....\n"  ;
-         }
-}
+             pid_t pid; //signed int type; representing a process ID
+             int status; //indicates status
+
+             if ((pid = fork()) < 0) { //true if there's an error
+                  cout << "*** ERROR: forking child process failed\n";
+                  exit(1);
+             }
+             else if (pid == 0) {
+               /* for the child process:         */
+                  if (execvp(test[i][0], test[i]) < 0) {     /* execute the command  */
+                       cout << "*** ERROR: exec failed\n";
+                       exit(1);
+                  }
+             }
+             else {             /* for the parent:      */
+                  while (waitpid(-1, &status, 0) != pid)       /* wait for completion  */
+                     cout << "WAITING....\n"  ; //included this for testing purposes
+             }
+    }
 }
