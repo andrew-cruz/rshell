@@ -10,7 +10,7 @@ class Shell {
 protected:
 	string line;
 	char commandLine[100];
-	char** cmd[100];
+	char* cmd[100];
 	int numCmd;
 public:
 	Shell();
