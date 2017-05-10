@@ -7,7 +7,6 @@ single command line at a time of with n number of arguments. It then executes th
 * Needs to have well commented
 * Not enough sufficient test cases
 * Not executing commands with ;, &&, and ||
-* Doesn't comment out commands
 
 ### Rubric
 * 5 points for well commented code
