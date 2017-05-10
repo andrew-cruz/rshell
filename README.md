@@ -1,36 +1,11 @@
-# Project T
+# CS100 - Assn2: RSHELL
 
-One Paragraph of project description goes here
+We will be implementing a command shell using C++ called rshell which reads in a
+single command line at a time of with n number of arguments. It then executes the commands and arguments using C++ syscalls in the order that it was written. The program is exited once the user types in “exit” into the command line.
 
 ## Known bugs
 
-### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Authors
 
