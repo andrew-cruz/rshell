@@ -35,7 +35,7 @@ void Command::parse() {
     //     strcpy(cmd[i], token);
     //     //Sets token to next char string that is seperated by space or semicolon
     //     token = strtok(NULL, " ;");
-    //     //Incerement counter
+    //     //Increment counter
     //     i++;
     // }
 
@@ -44,6 +44,7 @@ void Command::parse() {
 void Command::read() {}
 
 void Command::execute() {
+        //test cases?
         char a[10] = "echo";
         char b[10] = "hi";
         char c[10] = "ls";
@@ -68,20 +69,19 @@ void Command::execute() {
              pid_t pid; //signed int type; representing a process ID
              int status; //indicates status
 
-             if ((pid = fork()) < 0) { //true if there's an error
-                  cout << "*** ERROR: forking child process failed\n";
-                  exit(1);
+             if ((pid = fork()) < 0) { // <0 if there's an error
+                  cout << "*** ERROR: forking child process failed\n"; //msg error in forking
+                  exit(1); //exits from function
              }
-             else if (pid == 0) {
-               /* for the child process:         */
-                  if (execvp(test[i][0], test[i]) < 0) {     /* execute the command  */
-                       cout << "*** ERROR: exec failed\n";
-                       exit(1);
+             else if (pid == 0) { //in the child process
+                  if (execvp(test[i][0], test[i]) < 0) {  //executes the commands
+                       cout << "*** ERROR: exec failed\n";  //prints out msg if error
+                       exit(1); //exits from function
                   }
              }
-             else {             /* for the parent:      */
-                  while (waitpid(-1, &status, 0) != pid)       /* wait for completion  */
-                     cout << "WAITING....\n"  ; //included this for testing purposes
+             else { //in the parent process
+                  while (waitpid(-1, &status, 0) != pid) //waits until child is dead
+                     cout << "WAITING....\n"  ; //included msg for testing purposes
              }
     }
 }
