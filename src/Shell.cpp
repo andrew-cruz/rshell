@@ -22,7 +22,7 @@ void Shell::read(){
 
 		if(a->line == "exit")
 			break;
-
+		
 		a->parse();
 		a->execute();
 	}

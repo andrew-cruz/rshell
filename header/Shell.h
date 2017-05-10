@@ -9,9 +9,10 @@ using namespace std;
 class Shell {
 protected:
 	string line;
-	char commandLine[100];
-	char** cmd[100];
+	char** cmdArg[100];
+	// char* ok[100];
 	int numCmd;
+	// char commandLine[100];
 public:
 	Shell();
 	void read();
