@@ -11,11 +11,8 @@ Command::Command() {}
 /*
     @desc Parses through user input by storing each command and argument in
           an index of the class member char pointer array
-
     @param na
     @return void
-
-
 */
 void Command::parse() {
     //Copying string into char array and parsing is stopped if # is found
