@@ -1,7 +1,8 @@
 #include "../header/Command.h"
-#include "unistd.h"
-#include <vector>
-#include <string>
+#include <sys/wait.h>
+#include <cstdlib>
+#include <string.h>
+#include <stdio.h>
 
 using namespace std;
 
