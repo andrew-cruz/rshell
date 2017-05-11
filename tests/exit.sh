@@ -1,5 +1,5 @@
 #!/bin/sh
-make; bin/rshell
+make; bin/exit.sh
 echo hi
 pwd
 ls -a

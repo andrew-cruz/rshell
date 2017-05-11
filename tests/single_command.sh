@@ -6,3 +6,6 @@ mkdir test
 pwd
 ls
 rm test
+touch text.txt
+echo take a look
+rm text.txt
