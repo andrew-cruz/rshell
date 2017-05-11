@@ -6,28 +6,34 @@
 
 using namespace std;
 
-Shell::Shell(){
-}
+//Empty shell constructor
+Shell::Shell() {}
 
-void Shell::read(){
+/*
+	@desc: reads in user input, parses the input, and execute the input
+		   if user inputs exit, terminates the program
+
+	@param: na
+	@return: void
+*/
+void Shell::read() {
 	bool leave = false;
 
-	while(!leave) {
+	while (!leave) {
 
 		Shell* a = new Command();
-
 		cout << "$ ";
-
 		getline(cin, a->line);
 
-		if(a->line == "exit")
+		if (a->line == "exit") {
+			cout << endl;
 			break;
-		
+		}
+
 		a->parse();
 		a->execute();
 	}
 }
 
+//Function is overwritten in child classes
 void Shell::parse() {}
-
-void Shell::print() {}
