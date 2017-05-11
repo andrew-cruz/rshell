@@ -4,9 +4,10 @@ We will be implementing a command shell using C++ called rshell which reads in a
 single command line at a time of with n number of arguments. It then executes the commands and arguments using C++ syscalls in the order that it was written. The program is exited once the user types in “exit” into the command line.
 
 ## Known bugs
-* Needs to have well commented code
-* Not enough sufficient test cases
-* Not executing commands with ;, &&, and ||
+* Realized until the last day of the deadline that this assignment should be about design patterns. We were too focused on creating only the Command and Shell classes
+* We deleted a majority of our code because it centered around having to break each word into letters, putting that into char[] which essentially removes the spaces, then having a char*[] for the commands and arguments to distinguish each executor from ;, &&, and ||, then putting that into a char**[] so execvp() can receive the correct arguments to actually execute the command
+* If we had a redo, we would have classes for the commands (e.g ls, echo), arguments(-a, hello world), each of the connector commands (&&, ||) and implement a Composite pattern from that
+* Not executing multiple commands with && and ||
 
 ### Rubric
 * 5 points for well commented code
