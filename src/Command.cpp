@@ -266,19 +266,22 @@ void Command::parse() {
 
     */
 
-    std::vector<char*[100]> c;
+
     //.at(d).at(g) = .at(i)
     int d = 0;
     int g = 0;
+    
+    std::vector<char*[]> c;
+
     for(int i = 0; i < v.size(); i++){
         if(v.at(i) == "NULL"){
             d++;
             g = 0;
         }
-        char* w = v.at(i).c_str();
-
-        c.at(d).at(g) = w;
-        g++;
+        char* a = new char[v.at(i).length() + 1];
+        strcpy(a,v.at(i).c_str());
+        // c.at(d)[g] = a;
+        // g++;
     }
 
 
@@ -416,8 +419,8 @@ void Command::execute() {
         // char h[10] = "-l";
 
         // char* cmd1[20];
-        //     cmd1[0] = a;
-        //     cmd1[1] = b;
+        //     cmd1[0] = {e,c,h,o};
+        //     cmd1[1] = {h,i};
         //     cmd1[2] =  NULL;
         // char* cmd2[20] = {c,d, NULL};
         // char* cmd3[20] = {e,f,g,h, NULL};
