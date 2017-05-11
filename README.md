@@ -1,12 +1,12 @@
-# CS100 - Assn2: RSHELL
+# <center>CS100 - Assn2: RSHELL</center>
 
 We will be implementing a command shell using C++ called rshell which reads in a
 single command line at a time of with n number of arguments. It then executes the commands and arguments using C++ syscalls in the order that it was written. The program is exited once the user types in “exit” into the command line.
 
 ## Known bugs
-* Needs to have well commented code
-* Not enough sufficient test cases
-* Not executing commands with ;, &&, and ||
+* Realized until the last day of the deadline that this assignment should be about design patterns. We were too focused on creating only the Command and Shell classes
+* If we had a redo, we would have classes for the commands (e.g ls, echo), arguments(-a, hello world), connector commands (&&, ||) and implement a Composite pattern from that
+* Not executing multiple commands with && and ||
 
 ### Rubric
 * 5 points for well commented code
