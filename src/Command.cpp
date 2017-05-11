@@ -1,5 +1,7 @@
 #include "../header/Command.h"
 #include "unistd.h"
+#include <vector>
+#include <string>
 // #include  <stdio.h>
 // #include  <sys/types.h>
 // #include <string>
@@ -15,11 +17,6 @@ Command::Command() {
     numCmd = 0;
 }
 
-void printa(char* a[],string b){
-    for(unsigned i = 0; i < sizeof(*a) - 1; i++){
-        cout << b << "[" << i << "] is " << a[i] << endl;
-    }
-}
 
 void Command::parse() {
     //Atempt number 2
@@ -145,7 +142,7 @@ void Command::parse() {
             }*/                  
 
     //Attempt number 1
-        /*
+/*
     char* cmd[100];
     char commandLine[1000];
     // Assignes the vector commandline input to a char array
@@ -184,69 +181,216 @@ void Command::parse() {
     cmdArg[0] = {cmd[0]};
     cmdArg[1] = {cmd[1],cmd[2]};
     cmdArg[2] = {cmd[3],cmd[4]};
-    cmdArg[3] = {cmd[5],cmd[6]};*/
+    cmdArg[3] = {cmd[5],cmd[6]};
+*/
 
 
     //THIS WORKS FOR SINGLE COMMANDS ONLY
-    char* cmd[100];
+    // char* cmd[100];
 
-    for(unsigned i = 0; i < line.length(); ++i){
-        commandLine[i] = line.at(i);
+
+    // for(unsigned i = 0; i < line.length(); i++){
+        // cout << i << ") " << line.at(i) << endl;
+    // }
+
+    std::vector<string> v;
+    string a;
+    
+    // GETTING RID OF ; AND SEPERATING COMMANDS 
+    while( line.find(" ") != string::npos ){
+        
+        a = line.substr( 0,  line.find(" "));
+        // cout << "A is " << a << endl;
+        if(a.find(";") != string::npos){
+            
+            a.erase(a.find(";"),1);
+            v.push_back(a);
+            v.push_back("NULL");
+        }
+        else{
+            v.push_back(a);
+        }
+        // cout << "\terasing from 0 - " << line.find(";") + 1 << endl;
+        // for(unsigned i = 0; i < line.find(";") + 1; i++){
+        //     cout << line.at(i) << endl;
+        // }
+        line.erase(0, line.find(" ") + 1);
+
+        // for(unsigned i = 0; i < line.length(); i++){
+        // cout << "\t\t" << i << ") " << line.at(i) << endl;
+        // }
     }
+
+    cout << "line is " << line << endl;
+
+    if(line.find(";") != string::npos){
+            line.pop_back();
+            v.push_back(line);
+            v.push_back("NULL");
+    }
+    else{
+        v.push_back(line);
+        v.push_back("NULL");
+    }
+
+    for(unsigned i = 0; i < v.size(); i++){
+        cout << v.at(i) << endl;
+    }
+
+
+    // char* cmd1[20];
+    //     cmd1[0] = a;
+    //     cmd1[1] = b;
+    //     cmd1[2] =  NULL;
+
+    /*
+
+        char* cmd1[20];
+            cmd1[0] = v.at(0);
+            cmd1[1] = v.at(1);
+            cmd1[2] = v.at(2);
+        char* cmd2[30];
+            cmd2[0] = v.at(3);
+            cmd2[1] = v.at(4);
+            cmd2[2] = v.at(5);
+
+        vector<char*[]> a;
+
+            a.at(0).at(0) = v.at(0);
+            a.at(0).at(1) = v.at(1);
+            a.at(0).at(2) = v.at(2);
+
+            a.at(1).at(0) = v.at(3);
+            a.at(1).at(1) = v.at(4);
+            a.at(1).at(2) = v.at(5); 
+
+    */
+
+    std::vector<char*[100]> c;
+    //.at(d).at(g) = .at(i)
+    int d = 0;
+    int g = 0;
+    for(int i = 0; i < v.size(); i++){
+        if(v.at(i) == "NULL"){
+            d++;
+            g = 0;
+        }
+        char* w = v.at(i).c_str();
+
+        c.at(d).at(g) = w;
+        g++;
+    }
+
+
+
+
+
+    //GETTING RID OF SPACES WITH EACH INDIVIDUAL ARGUMENT
+
+    // std::vector<string> args;
+
+    // for(unsigned i = 0; i < v.size(); i++){
+    //     // cout << v.at(i) << endl;
+    //     //ERASES first space
+    //     if(v.at(i).at(0) == ' '){
+    //         v.at(i).erase(0,1);
+    //     }
+    //     if(v.at(i).find(" ") != string::npos){
+
+    //         for(int j = 0; j < v.at(i).length(); j++){
+    //             if(v.at(i).at(j) == ' '){
+    //                 args.push_back( v.at(i).substr(0, j + 1));
+    //             }
+    //         }
+
+    //         // while(v.at(i).find(" ") != string::npos){
+    //         //     int i = v.at(i).find(" ");
+
+    //         // }
+
+
+    //     }
+    // }
+
+
+    // for(unsigned i = 0; i < v.size(); i++){
+    //     cout << v.at(i) << endl;
+
+    // }
+
+    // // cout << "ARGS\n";
+    // for(unsigned i = 0; i < args.size(); i++){
+    //     cout << args.at(i) << endl;
+    // }
+
+    // std::vector<char*> g;
+    // //Have to s
+
+    // int counter = 1;
+    // for(unsigned i = 0; i < v.size(); i++){
+
+
+    //     //If spaces found we need to do work
+    //     if(v.at(i).find(" ") != string::npos){
+    //         cout << "We need work\n";
+    //         cout << v.at(i) << endl;
+
+
+    //     }
+    //     else{
+    //         char* c = new char [v.at(i).length() + 1];
+    //         //char c[]
+            
+    //         strcpy(c, v.at(i).c_str());
+
+    //         //char c[] = 'l','s'
+
+    //         g.push_back(c);
+
+            
+    //         counter++;
+    //     }
+
+
+    // }
+
+
+/********************************?*/
+
+
+    // for(unsigned i = 0; i < counter - 1; ++i){
+    //     cout << b[i] << endl;
+    // }
+
+    // cout << sizeof(b);
+    // for(unsigned i = 0; i < line.length(); ++i){
+    //     commandLine[i] = line.at(i);
+    // }
 
 
 
 
 
   
-    //Used to get each 
-      char* token = strtok(commandLine, " ");
+    // //Used to get each 
+    //   char* token = strtok(commandLine, " ");
       
-      int i = 0;
- 
-     while(token != NULL){
- 
-         cmd[i] = (char*) malloc(strlen(token) + 1);
-         strcpy(cmd[i], token);
- 
-         token = strtok(NULL, " ");
-         i++;
-      }
-
-    printa(cmd,"*cmd");
-
-
-    for(unsigned i = 0; i < sizeof(*cmd) - 1; i++){
-       
-        int in = strcspn(cmd[i],";");
-        
-        if(cmd[i][in] == ';'){
-            
-            cout << "semicolon found at *cmd[" << i << "][" << in << "]\n";
-            
-            char a[100];
-            
-            for(unsigned j = 0; j < sizeof(cmd[i]); j++){
-                if(static_cast<int>(j) != in){
-                    a[j] = cmd[i][j];
-                }
-                else{
-                    // cout << "Assigning a " << a[0] << " to ok[" << i << "]\n";
-                    ok[i] = new char[100];
-                    ok[i] = a;
-
-                    // cout << "Ok[" << i << "] is " << ok[i] << endl;
-                }
-           
-           }
-        }
-    }
-
-    char temp[10] = static_cast<char []>(cmd[0]);
+    //   int i = 0;
     
+    //   // cout << "\tSize is " << sizeof(token) << endl;
 
-    // cout << "ok[0] is " << ok[0] << endl;
-    // cout << "i is " << in << endl;
+
+    //  while(token != NULL){
+ 
+    //      cmd[i] = (char*) malloc(strlen(token) + 1);
+    //      strcpy(cmd[i], token);
+ 
+    //      token = strtok(NULL, " ");
+    //      i++;
+    //   }
+
+
+
 
 }
 
@@ -259,24 +403,30 @@ void Command::read() {}
 
 void Command::execute() {
     //This is the type of object that we want
-    /*
-        char a[10] = "echo";
-        char b[10] = "hi";
+    
+        // char a[10] = {'e','c','h','o'};
+        // char b[10] = {'h','i'};
         
-        char c[10] = "ls";
-        char d[10] = "-l";
+        // char c[10] = "ls";
+        // char d[10] = "-l";
         
-        char e[10] = "echo";
-        char f[10] = "hi";
-        char g[10] = "ls";
-        char h[10] = "-l";
+        // char e[10] = "echo";
+        // char f[10] = "hi";
+        // char g[10] = "ls";
+        // char h[10] = "-l";
 
-        char* cmd1[20] = {a,b, NULL};
-        char* cmd2[20] = {c,d, NULL};
-        char* cmd3[20] = {e,f,g,h, NULL};
+        // char* cmd1[20];
+        //     cmd1[0] = a;
+        //     cmd1[1] = b;
+        //     cmd1[2] =  NULL;
+        // char* cmd2[20] = {c,d, NULL};
+        // char* cmd3[20] = {e,f,g,h, NULL};
 
-        char** test[20] = {cmd1, cmd2,cmd3};
-    */
+        // char** test[20];
+        //     test[0] = cmd1;
+        //     test[1] = cmd2;
+        //     test[2] = cmd3;
+    
 
     // pid_t  pid;
     // int    status;
@@ -287,7 +437,7 @@ void Command::execute() {
     // }
     // else if (pid == 0) { 
     // /* for the child process:         */
-    //   if (execvp(cmd[0], cmd) < 0) {     /* execute the command  */
+    //   if (execvp(test[0][0], test[0]) < 0) {     /* execute the command  */
     //        printf("*** ERROR: exec failed\n");
     //        exit(1);
     //   }
