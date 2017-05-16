@@ -9,15 +9,29 @@ using namespace std;
 Shell::Shell(){}
 
 void Shell::read(){
-	cout << "CS100$ ";
-	getline(cin,cmdLine);
-	Shell::parse();
-	Shell::execute();
+	bool cont = true;
+	while(cont){
+		cout << "CS100$ ";
+		//GEts user input
+		getline(cin,cmdLine);
+		//Parses anything after #
+		Shell::parse(cmdLine);
+		//If exit is found sets cont to false
+		cont = Shell::cont();
+		//Parses user input
+		Shell::parse();
+		//Executes input
+		Shell::execute();
+	}
 }
 
 void Shell::parse(){
 	//While commands are still in string
 	while(cmdLine.length() != 0) {
+		//Parse out exit
+		if(cmdLine.find("exit") != string::npos){
+			cmdLine.erase( cmdLine.find("exit"), cmdLine.size() - 1 );
+		}
 		//If multiple commands found
 		if( cmdLine.find(';') != string::npos) {
 			//Store begining upto first semicolon of string into a substring
@@ -47,7 +61,19 @@ void Shell::parse(){
 	}
 }
 
-void Shell::parse(string strParse){ }
+bool Shell::cont(){
+	if(cmdLine.find("exit") != string::npos)
+		return false;
+	else
+		return true;
+}
+
+void Shell::parse(string strParse){
+	//Filter out comments and exit
+	if(cmdLine.find("#") != string::npos){
+		cmdLine.erase( cmdLine.find("#"), cmdLine.size() - 1 );
+	}
+}
 
 void Shell::execute(){
 	while(commands.size() != 0){
