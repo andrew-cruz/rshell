@@ -3,18 +3,18 @@
 #include "../header/Or.h"
 #include "../header/Command.h"
 
-Or::Or(){
+Or::Or() {}
 
-}
 Or::Or(string str){
 	Or::parse(str);
 }
-void Or::read(){
 
-}
-void Or::parse(){
+void Or::read() {}
 
-}
+void Or::cont() {}
+
+void Or::parse() {}
+
 void Or::parse(string strParse){
 	string parsingStr = strParse;
 
@@ -39,13 +39,8 @@ void Or::parse(string strParse){
 			parsingStr.append("||");
 		}
 	}
-
-
-	//Used to see if commands are stored
-	// for(int i = 0; i < cmdOr.size(); ++i){
-	// 	cmdOr.at(i)->getCmd();
-	// }
 }
+
 void Or::execute(){
 	for(unsigned i = 0; i < cmdOr.size(); i++) {
 		cmdOr.at(i)->execute();

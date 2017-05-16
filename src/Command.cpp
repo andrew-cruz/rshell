@@ -9,15 +9,17 @@
 
 using namespace std;
 
-Command::Command(){}
+Command::Command() {}
 
 Command::Command(string str){
 	Command::parse(str);
 }
 
-void Command::read(){}
+void Command::read() {}
 
-void Command::parse(){}
+void Command::parse() {}
+
+void Command::cont() {}
 
 void Command::parse(string strParse){
 	cmd = strParse;
@@ -44,22 +46,23 @@ void Command::execute(){
 
 void Command::exec(){
 	//Execute command
- 	pid_t  pid;
-    int    status;
-    if ( (pid = fork()) < 0) {
-        perror ("ERROR: forking failed\n");
-        exit(1);
-    }
-    else if (pid == 0) {
-        //In child process
-        if (execvp(command[0], command) < 0) {
-            perror("ERROR: exec failed\n");
-            exit(1);
-        }
-    }
-    else {
-        //In parent process
-        while (waitpid(-1, &status, 0) != pid)
-            cout << "waiting....\n";
-    }
+	pid_t pid;
+	int status;
+
+	if ( (pid = fork()) < 0) {
+		perror ("ERROR: forking failed\n");
+		exit(1);
+	}
+	else if (pid == 0) {
+		//In child process
+		if (execvp(command[0], command) < 0) {
+			perror("ERROR: exec failed\n");
+			exit(1);
+		}
+	}
+	else {
+		//In parent process
+		while (waitpid(-1, &status, 0) != pid)
+		cout << "waiting....\n";
+		}
 }

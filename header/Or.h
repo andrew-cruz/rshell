@@ -12,6 +12,7 @@ public:
 	//Inherited
 	void read();
 	void parse();
+	void cont();
 	void parse(string);
 	void execute();
 };
