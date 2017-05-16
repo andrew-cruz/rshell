@@ -14,6 +14,7 @@ public:
 	Shell();
 	void read();
 	void parse();
+	bool cont();
 	virtual void parse(string a) = 0;
 	virtual void execute() = 0;
 };
