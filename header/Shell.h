@@ -1,21 +1,22 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-#include <vector>
 #include <string>
+#include <queue>
 
 using namespace std;
 
-class Shell {
+class Shell{
 protected:
-	string line;
-	char commandLine[100];
-	char* cmd[100];
+	string cmdLine;
+	queue<Shell*> commands;
 public:
 	Shell();
 	void read();
-	virtual void parse();
+	void parse();
+	virtual void parse(string a) = 0;
 	virtual void execute() = 0;
 };
+
 
 #endif
