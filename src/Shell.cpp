@@ -4,30 +4,37 @@
 #include "../header/Or.h"
 #include "../header/Command.h"
 
+#define FOUND false
+#define NOTFOUND true
+
 using namespace std;
 
-Shell::Shell(){}
+Shell::Shell() {}
 
 void Shell::read(){
-	bool cont = true;
-	while(cont){
-		cout << "CS100$ ";
-		//GEts user input
-		getline(cin,cmdLine);
+	bool cont = NOTFOUND;
+
+	cout << "CS100$ ";
+
+	//While user input
+	while(getline(cin,cmdLine)){
 		//Parses anything after #
 		Shell::parse(cmdLine);
 		//If exit is found sets cont to false
 		cont = Shell::cont();
+		if(!cont)
+		    break;
 		//Parses user input
 		Shell::parse();
 		//Executes input
 		Shell::execute();
+		cout << "CS100$ ";
 	}
 }
 
 void Shell::parse(){
 	if(cmdLine.find("exit") != string::npos){
-		cmdLine.erase( cmdLine.find("exit"), cmdLine.size() - 1 );
+	    cmdLine.erase( cmdLine.find("exit"), cmdLine.size() - 1 );
 	}
 	//While commands are still in string
 	while(cmdLine.length() != 0) {
@@ -62,15 +69,17 @@ void Shell::parse(){
 
 bool Shell::cont(){
 	if(cmdLine.find("exit") != string::npos)
-		return false;
+		return FOUND;
 	else
-		return true;
+		return NOTFOUND;
 }
 
 void Shell::parse(string strParse){
 	//Filter out comments and exit
 	if(cmdLine.find("#") != string::npos){
 		cmdLine.erase( cmdLine.find("#"), cmdLine.size() - 1 );
+		if(cmdLine.size() == 1)
+			cmdLine.clear();
 	}
 }
 

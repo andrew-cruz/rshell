@@ -3,15 +3,13 @@
 #include "../header/Or.h"
 #include "../header/Command.h"
 
-Or::Or() {}
+Or::Or() : Shell() {}
 
-Or::Or(string str){
+Or::Or(string str) {
 	Or::parse(str);
 }
 
 void Or::read() {}
-
-void Or::cont() {}
 
 void Or::parse() {}
 

@@ -15,7 +15,7 @@ public:
 	void read();
 	void parse();
 	bool cont();
-	virtual void parse(string a) = 0;
+	virtual void parse(string) = 0;
 	virtual void execute() = 0;
 };
 

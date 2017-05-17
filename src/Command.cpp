@@ -1,17 +1,18 @@
 #include "../header/Command.h"
 #include <iostream>
 #include <sys/wait.h>
-#include  <sys/types.h>
+#include <sys/types.h>
 #include <cstdlib>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdexcept>
 
 using namespace std;
 
-Command::Command() {}
+Command::Command() : Shell() {}
 
-Command::Command(string str){
+Command::Command(string str) {
 	Command::parse(str);
 }
 
@@ -19,9 +20,7 @@ void Command::read() {}
 
 void Command::parse() {}
 
-void Command::cont() {}
-
-void Command::parse(string strParse){
+void Command::parse(string strParse) {
 	cmd = strParse;
 }
 
@@ -62,7 +61,6 @@ void Command::exec(){
 	}
 	else {
 		//In parent process
-		while (waitpid(-1, &status, 0) != pid)
-		cout << "waiting....\n";
-		}
+		while (waitpid(-1, &status, 0) != pid) {}
+	}
 }

@@ -3,17 +3,15 @@
 #include "../header/Or.h"
 #include "../header/Command.h"
 
-And::And() {}
+And::And() : Shell() {}
 
-And::And(string str){
+And::And(string str) {
 	And::parse(str);
 }
 
 void And::read() {}
 
 void And::parse() {}
-
-void And::cont() {}
 
 void And::parse(string strParse){
 	string parsingStr = strParse;
