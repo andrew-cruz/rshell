@@ -1,25 +1,26 @@
 #include "../header/Command.h"
 #include <iostream>
 #include <sys/wait.h>
-#include  <sys/types.h>
+#include <sys/types.h>
 #include <cstdlib>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdexcept>
 
 using namespace std;
 
-Command::Command(){}
+Command::Command() : Shell() {}
 
-Command::Command(string str){
+Command::Command(string str) {
 	Command::parse(str);
 }
 
-void Command::read(){}
+void Command::read() {}
 
-void Command::parse(){}
+void Command::parse() {}
 
-void Command::parse(string strParse){
+void Command::parse(string strParse) {
 	cmd = strParse;
 }
 
@@ -44,22 +45,36 @@ void Command::execute(){
 
 void Command::exec(){
 	//Execute command
- 	pid_t  pid;
-    int    status;
-    if ( (pid = fork()) < 0) {
-        perror ("ERROR: forking failed\n");
-        exit(1);
-    }
-    else if (pid == 0) {
-        //In child process
-        if (execvp(command[0], command) < 0) {
-            perror("ERROR: exec failed\n");
-            exit(1);
-        }
-    }
-    else {
-        //In parent process
-        while (waitpid(-1, &status, 0) != pid)
-            cout << "waiting....\n";
-    }
+	pid_t pid;
+	int status;
+
+	if ( (pid = fork()) < 0) {
+		perror ("ERROR: forking failed\n");
+		success = false;
+		exit(1);
+		// return false;
+	}
+	else if (pid == 0) {
+		//In child process
+		if (execvp(command[0], command) < 0) {
+			perror("ERROR: exec failed\n");
+			success = false;
+			exit(1);
+			// return false;
+		}
+	}
+	else {
+		//In parent process
+		while (waitpid(-1, &status, 0) != pid) {}
+	}
+
+	success = true;
+}
+
+bool Command::getSuccess(int index){
+	return getSuc();
+}
+
+bool Command::getSuc(){
+	return success;
 }

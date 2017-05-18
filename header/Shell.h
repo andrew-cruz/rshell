@@ -14,8 +14,10 @@ public:
 	Shell();
 	void read();
 	void parse();
-	virtual void parse(string a) = 0;
+	bool cont();
+	virtual void parse(string) = 0;
 	virtual void execute() = 0;
+	virtual bool getSuccess(int) = 0;
 };
 
 

@@ -6,7 +6,7 @@
 int main(){
 	//Does not matter what type the Shell* points to because the read function for all classes is the same
 	Shell* a = new Command();
-
 	a->read();
 
+	return 0;
 }
