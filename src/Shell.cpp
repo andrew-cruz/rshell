@@ -22,12 +22,12 @@ void Shell::read(){
 		Shell::parse(cmdLine);
 		//If exit is found sets cont to false
 		cont = Shell::cont();
-		if(!cont)
-		    break;
 		//Parses user input
 		Shell::parse();
 		//Executes input
 		Shell::execute();
+		if(!cont)
+		    break;
 		cout << "CS100$ ";
 	}
 }
