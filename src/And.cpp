@@ -44,3 +44,7 @@ void And::execute(){
 		cmdAnd.at(i)->execute();
 	}
 }
+
+bool And::getSuccess(int index){
+	return cmdAnd.at(index)->getSuccess(index);
+}

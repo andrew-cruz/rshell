@@ -50,17 +50,31 @@ void Command::exec(){
 
 	if ( (pid = fork()) < 0) {
 		perror ("ERROR: forking failed\n");
+		success = false;
 		exit(1);
+		// return false;
 	}
 	else if (pid == 0) {
 		//In child process
 		if (execvp(command[0], command) < 0) {
 			perror("ERROR: exec failed\n");
+			success = false;
 			exit(1);
+			// return false;
 		}
 	}
 	else {
 		//In parent process
 		while (waitpid(-1, &status, 0) != pid) {}
 	}
+
+	success = true;
+}
+
+bool Command::getSuccess(int index){
+	return getSuc();
+}
+
+bool Command::getSuc(){
+	return success;
 }

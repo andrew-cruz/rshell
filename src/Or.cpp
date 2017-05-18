@@ -42,5 +42,12 @@ void Or::parse(string strParse){
 void Or::execute(){
 	for(unsigned i = 0; i < cmdOr.size(); i++) {
 		cmdOr.at(i)->execute();
+		if( cmdOr.at(i)->getSuccess(i) ){
+			break;
+		}
 	}
+}
+
+bool Or::getSuccess(int index){
+	return cmdOr.at(index)->getSuccess(index);
 }

@@ -35,6 +35,9 @@ void Shell::read(){
 void Shell::parse(){
 	if(cmdLine.find("exit") != string::npos){
 	    cmdLine.erase( cmdLine.find("exit"), cmdLine.size() - 1 );
+		if(cmdLine.size() == 1){
+			cmdLine.clear();
+		}
 	}
 	//While commands are still in string
 	while(cmdLine.length() != 0) {
