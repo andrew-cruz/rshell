@@ -51,7 +51,8 @@ void Command::exec(){
 	if ( (pid = fork()) < 0) {
 		perror ("ERROR: forking failed\n");
 		success = false;
-		exit(1);
+		return;
+		// exit(1);
 		// return false;
 	}
 	else if (pid == 0) {
@@ -59,7 +60,8 @@ void Command::exec(){
 		if (execvp(command[0], command) < 0) {
 			perror("ERROR: exec failed\n");
 			success = false;
-			exit(1);
+			return;
+			// exit(1);
 			// return false;
 		}
 	}
@@ -69,7 +71,6 @@ void Command::exec(){
 	}
 
 	success = true;
-	cout << "LEaving\n";
 }
 
 bool Command::getSuccess(int index){
