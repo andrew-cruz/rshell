@@ -14,6 +14,7 @@ public:
 	void parse();
 	void parse(string);
 	void execute();
+	bool getSuccess(int);
 };
 
 

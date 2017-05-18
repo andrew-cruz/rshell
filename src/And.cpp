@@ -3,17 +3,16 @@
 #include "../header/Or.h"
 #include "../header/Command.h"
 
-And::And(){
+And::And() : Shell() {}
 
-}
-And::And(string str){
+And::And(string str) {
 	And::parse(str);
 }
-void And::read(){
-}
-void And::parse(){
 
-}
+void And::read() {}
+
+void And::parse() {}
+
 void And::parse(string strParse){
 	string parsingStr = strParse;
 
@@ -38,15 +37,14 @@ void And::parse(string strParse){
 			parsingStr.append("&&");
 		}
 	}
-
-
-	//Used to see if commands are stored
-	// for(int i = 0; i < cmdAnd.size(); ++i){
-	// 	cmdAnd.at(i)->getCmd();
-	// }
 }
+
 void And::execute(){
 	for(unsigned i = 0; i < cmdAnd.size(); i++) {
 		cmdAnd.at(i)->execute();
 	}
+}
+
+bool And::getSuccess(int index){
+	return cmdAnd.at(index)->getSuccess(index);
 }
