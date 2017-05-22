@@ -10,6 +10,7 @@ Shell::Shell(){}
 
 void Shell::read(){
 	bool cont = true;
+
 	while(cont){
 		cout << "CS100$ ";
 		//GEts user input
