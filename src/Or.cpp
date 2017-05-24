@@ -2,11 +2,17 @@
 #include "../header/And.h"
 #include "../header/Or.h"
 #include "../header/Command.h"
+#include "../header/Test.h"
 
 Or::Or() : Shell() {}
 
 Or::Or(string str) {
 	Or::parse(str);
+}
+
+Or::Or(Shell* left, Shell* right){
+	cmdOr.push_back(left);
+	cmdOr.push_back(right);
 }
 
 void Or::read() {}
@@ -23,6 +29,9 @@ void Or::parse(string strParse){
 			if( temp.find("&&") != string::npos){
 				Shell* tempAnd = new And(temp);
 				cmdOr.push_back(tempAnd);
+			} else if( temp.find("test") != string::npos ){
+				Shell* tempTest = new Test(temp);
+				cmdOr.push_back(tempTest);
 			}
 			//If substring is just a simple command create a Shell* of type Command and push back into vector
 			else{

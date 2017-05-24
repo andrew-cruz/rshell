@@ -1,8 +1,12 @@
 #include <iostream>
+#include <iterator>
 #include "../header/Shell.h"
 #include "../header/And.h"
 #include "../header/Or.h"
 #include "../header/Command.h"
+#include "../header/Test.h"
+#include "../header/MonoShell.h"
+#include "../header/Para.h"
 
 #define FOUND false
 #define NOTFOUND true
@@ -45,8 +49,17 @@ void Shell::parse(){
 		if( cmdLine.find(';') != string::npos) {
 			//Store begining upto first semicolon of string into a substring
 			string temp = cmdLine.substr(0, cmdLine.find(";"));
+			//If substring contains test, creates Shell* of type Test and push back into queue
+			if( temp.find("test") != string::npos ){
+				Shell* tempTest = new Test(temp);
+				commands.push(tempTest);
+			}
+			else if( temp.find("(") != string::npos ){
+				Shell* tempPara = new Para(temp);
+				commands.push(tempPara);
+			}
 			//If substring contains && go create Shell* of type And and push back into queue
-			if( temp.find("&&") != string::npos ){
+			else if( temp.find("&&") != string::npos ){
 				Shell* tempAnd = new And(temp);
 				commands.push(tempAnd);
 			}
@@ -92,3 +105,10 @@ void Shell::execute(){
 		commands.pop();
 	}
 }
+
+
+// void Shell::print() {
+// 	for (unsigned i = 0; i < commands.size(); ++i) {
+// 	//	cout << commands.at(i) << endl;
+// 	}
+// }

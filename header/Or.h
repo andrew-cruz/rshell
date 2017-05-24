@@ -5,16 +5,17 @@
 
 class Or : public Shell{
 protected:
-	vector<Shell*> cmdOr;
+    vector<Shell*> cmdOr;
 public:
-	Or();
-	Or(string);
-	//Inherited
-	void read();
-	void parse();
-	void parse(string);
-	void execute();
-	bool getSuccess(int);
+    Or();
+    Or(string);
+    Or(Shell*, Shell*);
+    //Inherited
+    void read();
+    void parse();
+    void parse(string);
+    void execute();
+    bool getSuccess(int);
 };
 
 #endif
