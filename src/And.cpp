@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "../header/And.h"
 #include "../header/Or.h"
 #include "../header/Command.h"
@@ -13,6 +14,13 @@ And::And(string str) {
 And::And(Shell* right, Shell* left){
 	cmdAnd.push_back(right);
 	cmdAnd.push_back(left);
+}
+
+void And::getCommand() {
+	for(unsigned i = 0; i < cmdAnd.size(); ++i) {
+		cout << "&&\n";
+		cmdAnd.at(i)->getCommand();
+	}
 }
 
 void And::read() {}
@@ -49,7 +57,6 @@ void And::parse(string strParse){
 }
 
 void And::execute(){
-
 	for(unsigned i = 0; i < cmdAnd.size(); i++) {
 		cmdAnd.at(i)->execute();
 	}

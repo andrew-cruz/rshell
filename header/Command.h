@@ -16,6 +16,7 @@ public:
 	void read();
 	void parse();
 	void parse(string);
+	void getCommand();
 	void execute();
 	bool getSuccess(int);
 	//Unique to Class

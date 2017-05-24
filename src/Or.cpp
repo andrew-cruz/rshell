@@ -19,6 +19,13 @@ void Or::read() {}
 
 void Or::parse() {}
 
+void Or::getCommand() {
+	for(unsigned i = 0; i < cmdOr.size(); ++i) {
+		cout << "||\n";
+		cmdOr.at(i)->getCommand();
+	}
+}
+
 void Or::parse(string strParse){
 	string parsingStr = strParse;
 

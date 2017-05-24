@@ -14,6 +14,7 @@ class Test : public Shell {
     	Test(string);
     	//Inherited
     	void read();
+        void getCommand();
     	void parse();
     	void parse(string);
     	void execute();

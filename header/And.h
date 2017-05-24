@@ -12,6 +12,7 @@ public:
 	And(Shell*, Shell*);
 	//Inherited
 	void read();
+	void getCommand();
 	void parse();
 	void parse(string);
 	void execute();
