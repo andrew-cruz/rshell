@@ -1,22 +1,26 @@
-#ifndef AND_H
-#define AND_H
+#ifndef COMMAND_H
+#define COMMAND_H
 
-#include "../header/Shell.h"
+#define SIZE_OF_ARRAY 100
 
-class And : public Shell{
+#include "Shell.h"
+
+class Command : public Shell{
 protected:
-	vector<Shell*> cmdAnd;
+	string cmd;
+	char* command[SIZE_OF_ARRAY];
 public:
-	And();
-	And(string);
-	And(Shell*, Shell*);
+	Command();
+	Command(string);
 	//Inherited
 	void read();
 	void parse();
 	void parse(string);
 	void execute();
 	bool getSuccess(int);
+	//Unique to Class
+	void exec();
+	bool getSuc();
 };
-
 
 #endif

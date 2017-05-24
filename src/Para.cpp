@@ -19,8 +19,6 @@ Para::Para(Shell* sPtr){
 
 void Para::parse(string a){
     cout << "Parsing A\n";
-
-
 }
 
 void Para::execute(){

@@ -11,6 +11,8 @@ class Para : public MonoShell{
     // Para(string){};
     Para(string);
 
+    void parse(string);
+    void execute();
 
 };
 
