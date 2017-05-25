@@ -39,8 +39,8 @@ void Shell::read(){
 		//Parses user input
 		Shell::parse();
 		//Executes input
-		//Shell::getCommand();
-		Shell::execute();
+		Shell::getCommand();
+		//Shell::execute();
 		if(!cont)
 		    break;
 
