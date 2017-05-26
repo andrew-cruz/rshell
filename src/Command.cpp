@@ -21,11 +21,12 @@ void Command::parse(string strParse) {
 }
 
 void Command::getCommand() {
-	cout << cmd << endl;
+	cout << cmd << " ";
 }
 
 void Command::execute(){
 	//Copy cmd c string into char * str
+	// cout << "We are executing " << cmd << endl;
 	char* str = strdup(cmd.c_str());
 	//Get rid of whitespaces, semicolons, and apostrophes
 	char* token = strtok(str, " ;\"");

@@ -10,10 +10,17 @@ Or::Or(string str) {
 	Or::parse(str);
 }
 
+Or::Or(Shell* left, Shell* right){
+	cmdOr.push_back(left);
+	cmdOr.push_back(right);
+}
 void Or::getCommand() {
 	for(unsigned i = 0; i < cmdOr.size(); ++i) {
-		cout << "||\n";
+		if(i != 0 )
+			cout << " || ";
 		cmdOr.at(i)->getCommand();
+		if( i == 0)
+			cout << " || ";
 	}
 }
 
@@ -48,6 +55,7 @@ void Or::parse(string strParse){
 
 void Or::execute(){
 	for(unsigned i = 0; i < cmdOr.size(); i++) {
+		// cout << "Or execute\n";
 		cmdOr.at(i)->execute();
 		if( cmdOr.at(i)->getSuccess(i) ){
 			break;

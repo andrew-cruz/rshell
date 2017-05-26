@@ -9,6 +9,7 @@ protected:
 public:
 	And();
 	And(string);
+	And(Shell*,Shell*);
 	//Inherited
 	void getCommand();
 	void parse(string);

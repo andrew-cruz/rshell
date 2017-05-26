@@ -9,6 +9,7 @@ protected:
 public:
     Or();
     Or(string);
+    Or(Shell*,Shell*);
     //Inherited
     void getCommand();
     void parse(string);

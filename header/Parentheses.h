@@ -3,6 +3,7 @@
 
 #include "../header/Shell.h"
 #include <string>
+#include <stack>
 
 using namespace std;
 
@@ -10,6 +11,7 @@ class Parentheses : public Shell{
 private:
     string newCmds;
     vector<string> precVec;
+    stack<Shell*> shellPtr;
 public:
     //Constructor
     Parentheses();
@@ -17,6 +19,7 @@ public:
     void parse();
     void parse(string);
     void setVector(string);
+    void execute();
     string getNewCmd();
 
 };
