@@ -5,10 +5,6 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <sys/types.h>
-#include "../header/Shell.h"
-#include "../header/And.h"
-#include "../header/Or.h"
-#include "../header/Command.h"
 #include "../header/Test.h"
 using namespace std;
 
@@ -18,9 +14,6 @@ Test::Test() : Shell() {}
 Test::Test(string str) {
 	Test::parse(str);
 }
-
-void Test::read() {}
-void Test::parse() {}
 
 void Test::getCommand() {
 	cout << testStr << endl;

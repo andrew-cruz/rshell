@@ -15,13 +15,12 @@ public:
 	Shell();
 	void read();
 	void parse();
-
 	bool cont();
-//	void print();
+	virtual bool getSuccess(int);
+	virtual void getCommand();
+	virtual void execute();
+	virtual string getNewCmd();
 	virtual void parse(string a) = 0;
-	virtual void execute() = 0;
-	virtual bool getSuccess(int) = 0;
-	virtual void getCommand() = 0;
 };
 
 

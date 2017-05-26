@@ -11,21 +11,12 @@ And::And(string str) {
 	And::parse(str);
 }
 
-And::And(Shell* right, Shell* left){
-	cmdAnd.push_back(right);
-	cmdAnd.push_back(left);
-}
-
 void And::getCommand() {
 	for(unsigned i = 0; i < cmdAnd.size(); ++i) {
 		cout << "&&\n";
 		cmdAnd.at(i)->getCommand();
 	}
 }
-
-void And::read() {}
-
-void And::parse() {}
 
 void And::parse(string strParse){
 	string parsingStr = strParse;

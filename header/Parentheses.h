@@ -8,23 +8,14 @@ using namespace std;
 
 class Parentheses : public Shell{
 private:
-    vector<Shell*> cmdPara;
+    string newCmds;
 public:
     //Constructor
-    Parentheses() {};
+    Parentheses();
     Parentheses(string);
-    Parentheses(Shell*);
-    //Need defintion
-    void parse(){}
-	void parse(string);
-	void execute(){};
+    void parse(string);
+    string getNewCmd();
 
-	 bool getSuccess(int) {return false;};
-	 void getCommand() {};
-     string getString() {
-         string temp = "Paran";
-         return temp;
-     };
 };
 
 #endif

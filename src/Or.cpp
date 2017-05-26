@@ -10,15 +10,6 @@ Or::Or(string str) {
 	Or::parse(str);
 }
 
-Or::Or(Shell* left, Shell* right){
-	cmdOr.push_back(left);
-	cmdOr.push_back(right);
-}
-
-void Or::read() {}
-
-void Or::parse() {}
-
 void Or::getCommand() {
 	for(unsigned i = 0; i < cmdOr.size(); ++i) {
 		cout << "||\n";

@@ -9,11 +9,8 @@ protected:
 public:
 	And();
 	And(string);
-	And(Shell*, Shell*);
 	//Inherited
-	void read();
 	void getCommand();
-	void parse();
 	void parse(string);
 	void execute();
 	bool getSuccess(int);

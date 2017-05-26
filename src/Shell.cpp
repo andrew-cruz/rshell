@@ -6,24 +6,14 @@
 #include "../header/Or.h"
 #include "../header/Command.h"
 #include "../header/Test.h"
-#include "../header/MonoShell.h"
-#include "../header/Para.h"
+#include "../header/Parentheses.h"
 
 #define FOUND false
 #define NOTFOUND true
 
 using namespace std;
 
-Shell::Shell() {}
-
-void Shell::getCommand() {
-	queue<Shell*> temp(commands);
-	while(!temp.empty()) {
-		temp.front()->getCommand();
-		temp.pop();
-	}
-
-}
+Shell::Shell() : success(false) {}
 
 void Shell::read(){
 	bool cont = NOTFOUND;
@@ -38,9 +28,6 @@ void Shell::read(){
 		cont = Shell::cont();
 		//Parses user input
 		Shell::parse();
-		//used for seeing our output
-		//Shell::getCommand();
-
 		//Executes input
 		Shell::execute();
 		if(!cont)
@@ -65,10 +52,10 @@ void Shell::parse(){
 			string temp = cmdLine.substr(0, cmdLine.find(";"));
 			//If substring contains test, creates Shell* of type Test and push back into queue
 
-			// else if( temp.find("(") != string::npos ){
-			// 	Shell* tempPara = new Para(temp);
-			// 	commands.push(tempPara);
-			// }
+			if( temp.find('(') != string::npos ){
+				Shell* newParen = new Parentheses(temp);
+				temp = newParen->getNewCmd();
+			}
 			//If substring contains && go create Shell* of type And and push back into queue
 			if( temp.find("&&") != string::npos ){
 				Shell* tempAnd = new And(temp);
@@ -89,6 +76,7 @@ void Shell::parse(){
 			}
 			//Erases the substring and reduces the string down
 			cmdLine.erase( 0, cmdLine.find(";") + 1 );
+			cmdLine.clear();
 		}
 		else{
 			//Push back a semicolon to go into if statment so we do not rewrite same code again
@@ -104,13 +92,16 @@ bool Shell::cont(){
 		return NOTFOUND;
 }
 
-void Shell::parse(string strParse){
-	//Filter out comments and exit
-	if(cmdLine.find("#") != string::npos){
-		cmdLine.erase( cmdLine.find("#"), cmdLine.size() - 1 );
-		if(cmdLine.size() == 1)
-			cmdLine.clear();
+bool Shell::getSuccess(int index){
+	return false;
+}
+void Shell::getCommand() {
+	queue<Shell*> temp(commands);
+	while(!temp.empty()) {
+		temp.front()->getCommand();
+		temp.pop();
 	}
+
 }
 
 void Shell::execute(){
@@ -120,9 +111,16 @@ void Shell::execute(){
 	}
 }
 
+string Shell::getNewCmd(){
+	string temp = "EMPTY";
+	return temp;
+}
 
-// void Shell::print() {
-// 	for (unsigned i = 0; i < commands.size(); ++i) {
-// 	//	cout << commands.at(i) << endl;
-// 	}
-// }
+void Shell::parse(string strParse){
+	//Filter out comments and exit
+	if(cmdLine.find("#") != string::npos){
+		cmdLine.erase( cmdLine.find("#"), cmdLine.size() - 1 );
+		if(cmdLine.size() == 1)
+			cmdLine.clear();
+	}
+}

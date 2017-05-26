@@ -16,10 +16,6 @@ Command::Command(string str) {
 	Command::parse(str);
 }
 
-void Command::read() {}
-
-void Command::parse() {}
-
 void Command::parse(string strParse) {
 	cmd = strParse;
 }
@@ -45,6 +41,12 @@ void Command::execute(){
 	command[i] = NULL;
 
 	Command::exec();
+}
+
+
+
+bool Command::getSuccess(int index){
+	return success;
 }
 
 void Command::exec(){
@@ -73,12 +75,4 @@ void Command::exec(){
 	}
 
 	success = true;
-}
-
-bool Command::getSuccess(int index){
-	return getSuc();
-}
-
-bool Command::getSuc(){
-	return success;
 }
