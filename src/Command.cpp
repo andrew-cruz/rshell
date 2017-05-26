@@ -28,13 +28,13 @@ void Command::execute(){
 	//Copy cmd c string into char * str
 	char* str = strdup(cmd.c_str());
 	//Get rid of whitespaces, semicolons, and apostrophes
-	char* token = strtok(str, " ;\"");
+	char* token = strtok(str, " ;\"\'");
 	//Used to traverse Command
 	int i  = 0;
 	//Used to traverse str from white space to white space
 	while(token != NULL){
 		command[i] = token;
-		token = strtok(NULL, " ;\"");
+		token = strtok(NULL, " ;\"\'");
 		i++;
 	}
 	//Set last element equal to NULL

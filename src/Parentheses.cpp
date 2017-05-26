@@ -19,7 +19,7 @@ void Parentheses::parse() {
 
     for(unsigned i = 0; i < precVec.size(); i++){
         //POP OUT OF STACK UNTIL ReACHING (
-        if(v.at(i) == ")"){
+        if(precVec.at(i) == ")"){
             //pop
             tempStrStk.top();
         }
