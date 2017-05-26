@@ -94,6 +94,7 @@ void Parentheses::parse() {
                         }
 
                     }
+                    //If next obj is another Command then 
                     else{
                         Shell* cmdLeft = new Command(tempStrStk.top());
                         tempStrStk.pop();
