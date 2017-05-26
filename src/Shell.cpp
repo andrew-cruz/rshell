@@ -38,9 +38,11 @@ void Shell::read(){
 		cont = Shell::cont();
 		//Parses user input
 		Shell::parse();
+		//used for seeing our output
+		//Shell::getCommand();
+
 		//Executes input
-		Shell::getCommand();
-		//Shell::execute();
+		Shell::execute();
 		if(!cont)
 		    break;
 

@@ -8,7 +8,8 @@ using namespace std;
 
 class Test : public Shell {
     protected:
-    	vector<Shell*> cmdTest;
+        string testStr;
+        //vector<Shell*> cmdTest;
     public:
     	Test();
     	Test(string);
@@ -19,6 +20,5 @@ class Test : public Shell {
     	void parse(string);
     	void execute();
     	bool getSuccess(int);
-    	void print(string);
 };
 #endif
