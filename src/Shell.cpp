@@ -55,12 +55,8 @@ void Shell::parse(){
 			// cout << "Temp is " << temp << endl;
 			if( temp.find('(') != string::npos ){
 				Shell* newParen = new Parentheses(temp);
-<<<<<<< HEAD
 				commands.push(newParen);
 				break;
-=======
-				temp = newParen->getNewCmd();
->>>>>>> c8e09cf91a6dda40ef624c399f30d8ee560e8f67
 			}
 			//If substring contains && go create Shell* of type And and push back into queue
 			if( temp.find("&&") != string::npos ){
