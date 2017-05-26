@@ -26,6 +26,7 @@ void Parentheses::parse() {
         // cout << "We are working with "  << precVec.at(i) << endl;
         //POP OUT OF STACK UNTIL ReACHING (
         if(precVec.at(i) == ")"){
+<<<<<<< HEAD
             // cout << "In outer if()\n";
             while( tempStrStk.top() != "(" ){
                 // cout << "In While()\n";
@@ -124,6 +125,10 @@ void Parentheses::parse() {
             if(!tempStrStk.empty())
                 tempStrStk.pop();
             // cout << "Leaving outer if\n";
+=======
+            //pop
+            tempStrStk.top();
+>>>>>>> 98f5831e31532a4040213b0f68d45df31f0d2e27
         }
         else{
             // cout << "Outer else\n";

@@ -43,7 +43,7 @@ void Shell::parse(){
 		if(cmdLine.size() == 1){
 			cmdLine.clear();
 		}
-	}
+	}gi
 	//While commands are still in string
 	while(cmdLine.length() != 0) {
 		//If multiple commands found

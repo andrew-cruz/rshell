@@ -37,6 +37,9 @@ void Or::parse(string strParse){
 			} else if( temp.find("test") != string::npos ){
 				Shell* tempTest = new Test(temp);
 				cmdOr.push_back(tempTest);
+			} else if( (temp.find("[") != string::npos) && (temp.find("]") != string::npos) ) {
+				Shell* tempTest = new Test(temp);
+				cmdOr.push_back(tempTest);
 			}
 			//If substring is just a simple command create a Shell* of type Command and push back into vector
 			else{

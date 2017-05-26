@@ -21,10 +21,24 @@ void Test::getCommand() {
 }
 void Test::parse(string strParse) {
 	//if beginning of string is "test", deletes it
-	strParse.erase(strParse.find("test"), strParse.find("test") + 4);
+	//strParse.erase(strParse.find("["));
+	if( ( (strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) )
+		&& (strParse.find("test") != string::npos) ) {
+			perror("ERROR: Can't have both test and []\n");
+			exit(1);
+	}
+
+	if( (strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) ) {
+		strParse.erase(strParse.find("["), 1);
+		strParse.erase(strParse.find("]"), 1);
+	}
+	if (strParse.find("test") != string::npos) {
+		strParse.erase(strParse.find("test"), strParse.find("test") + 4);
+	}
+
 	//if no "-" is found, appends it to the beginning
 	if(strParse.find("-") == string::npos) {
-	 	string dashE = "-e";
+	 	string dashE = "-e ";
 	 	strParse.insert(0,dashE);
 	 }
 	testStr = strParse;
@@ -103,7 +117,7 @@ void Test::execute() {
 		//Get rid of whitespaces and semicolons
 		char* token = strtok(cstr, " ");
 		cstr = token;
-		//
+
 		if ( (pid = fork()) < 0) {
 			perror ("ERROR: forking failed\n");
 			success = false;
