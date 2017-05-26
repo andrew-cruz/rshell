@@ -43,7 +43,7 @@ void Shell::parse(){
 		if(cmdLine.size() == 1){
 			cmdLine.clear();
 		}
-	}gi
+	}
 	//While commands are still in string
 	while(cmdLine.length() != 0) {
 		//If multiple commands found
@@ -53,10 +53,9 @@ void Shell::parse(){
 			//If substring contains test, creates Shell* of type Test and push back into queue
 
 			if( temp.find('(') != string::npos ){
-				cout << "Temp before " << temp << endl;
 				Shell* newParen = new Parentheses(temp);
 				commands.push(newParen);
-				cout << "Temp after " << temp << endl;
+				break;
 			}
 			//If substring contains && go create Shell* of type And and push back into queue
 			if( temp.find("&&") != string::npos ){
@@ -78,7 +77,6 @@ void Shell::parse(){
 			}
 			//Erases the substring and reduces the string down
 			cmdLine.erase( 0, cmdLine.find(";") + 1 );
-			cmdLine.clear();
 		}
 		else{
 			//Push back a semicolon to go into if statment so we do not rewrite same code again

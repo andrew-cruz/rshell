@@ -25,7 +25,7 @@ void Command::getCommand() {
 }
 
 void Command::execute(){
-	//Copy cmd c string into char * str
+	// Copy cmd c string into char * str
 	// cout << "We are executing " << cmd << endl;
 	char* str = strdup(cmd.c_str());
 	//Get rid of whitespaces, semicolons, and apostrophes
