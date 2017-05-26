@@ -29,6 +29,7 @@ void Shell::read(){
 		//Parses user input
 		Shell::parse();
 		//Executes input
+		//Shell::getCommand();
 		Shell::execute();
 		if(!cont)
 		    break;
@@ -51,12 +52,10 @@ void Shell::parse(){
 			//Store begining upto first semicolon of string into a substring
 			string temp = cmdLine.substr(0, cmdLine.find(";"));
 			//If substring contains test, creates Shell* of type Test and push back into queue
-
+			// cout << "Temp is " << temp << endl;
 			if( temp.find('(') != string::npos ){
-				cout << "Temp before " << temp << endl;
 				Shell* newParen = new Parentheses(temp);
-				commands.push(newParen);
-				cout << "Temp after " << temp << endl;
+				temp = newParen->getNewCmd();
 			}
 			//If substring contains && go create Shell* of type And and push back into queue
 			if( temp.find("&&") != string::npos ){
@@ -67,7 +66,9 @@ void Shell::parse(){
 			else if( temp.find("||") != string::npos){
 				Shell* tempOr = new Or(temp);
 				commands.push(tempOr);
-			} else if( temp.find("test") != string::npos ){
+			} else if( (temp.find("test") != string::npos) ||
+		 		( (temp.find("[") != string::npos) && (temp.find("]") != string::npos) ) ) {
+					// cout << "Test\n";
 				Shell* tempTest = new Test(temp);
 				commands.push(tempTest);
 			}
@@ -78,7 +79,6 @@ void Shell::parse(){
 			}
 			//Erases the substring and reduces the string down
 			cmdLine.erase( 0, cmdLine.find(";") + 1 );
-			cmdLine.clear();
 		}
 		else{
 			//Push back a semicolon to go into if statment so we do not rewrite same code again
@@ -108,7 +108,6 @@ void Shell::getCommand() {
 
 void Shell::execute(){
 	while(commands.size() != 0){
-		// cout << "Shell execute\n";
 		commands.front()->execute();
 		commands.pop();
 	}
