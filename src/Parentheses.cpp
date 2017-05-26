@@ -133,44 +133,73 @@ void Parentheses::parse() {
     }
 
 
+
+//**************
+//
+//***************
+// cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
+// cout << "Stack size is " << shellPtr.size() << endl;
+// while(!tempStrStk.empty()){
+//     cout << tempStrStk.top() << endl;
+//     tempStrStk.pop();
+// }
+// cout << "-------------------------------------------------\n";
+
+
 //*****************
 // CHeck if temp stack still has operators
 //*****************
-
-    // while(!tempStrStk.empty()){
-    //     if(tempStrStk.top() == "&&" || tempStrStk.top() == "||"){
-    //
-    //     }
-    //     else{
-    //         Shell* newCmd = new Command(tempStrStk.top());
-    //         tempStrStk.pop();
-    //
-    //         string op = tempStrStk.top();
-    //         tempStrStk.pop();
-    //
-    //         if(op == "&&"){
-    //             Shell* newAnd = new And(newCmd, shellPtr.top());
-    //             shellPtr.pop();
-    //             shellPtr.push(newAnd);
-    //         }
-    //         else{
-    //             Shell* newOr = new Or(newCmd,shellPtr.top());
-    //             shellPtr.pop();
-    //             shellPtr.push(newOr);
-    //         }
-    //     }
-    // }
-
-
-
-
-    cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
-    cout << "Stack size is " << shellPtr.size() << endl;
     while(!tempStrStk.empty()){
-        cout << tempStrStk.top() << endl;
-        tempStrStk.pop();
+        // cout << "IN while\n";
+        if(tempStrStk.top() == "&&" || tempStrStk.top() == "||"){
+            // cout << "In if\n";
+            string op = tempStrStk.top();
+            // tempStrStk.pop();
+            if(tempStrStk.size() == 1){
+            // cout << "if(1)\n";
+                if(op == "&&"){
+                    Shell* right = shellPtr.top();
+                    shellPtr.pop();
+                    Shell* left = shellPtr.top();
+                    shellPtr.pop();
+                    Shell* newAnd = new And(left, right);
+
+                    shellPtr.push(newAnd);
+                }
+                if(op == "||"){
+                    // cout << "In Or\n";
+                    Shell* right = shellPtr.top();
+                    shellPtr.pop();
+                    Shell* left = shellPtr.top();
+                    shellPtr.pop();
+                    Shell* newOr = new Or(left, right);
+
+                    shellPtr.push(newOr);
+                }
+            }
+
+            tempStrStk.pop();
+        }
+        else{
+            Shell* newCmd = new Command(tempStrStk.top());
+            tempStrStk.pop();
+
+            string op = tempStrStk.top();
+            tempStrStk.pop();
+
+            if(op == "&&"){
+                Shell* newAnd = new And(newCmd, shellPtr.top());
+                shellPtr.pop();
+                shellPtr.push(newAnd);
+            }
+            else{
+                Shell* newOr = new Or(newCmd,shellPtr.top());
+                shellPtr.pop();
+                shellPtr.push(newOr);
+            }
+        }
     }
-   cout << "-------------------------------------------------\n";
+
 }
 
 void Parentheses::parse(string str){
