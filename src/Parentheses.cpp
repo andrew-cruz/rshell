@@ -22,7 +22,7 @@ void Parentheses::parse() {
     stack<string> tempStrStk;
     //Iterate through the entire vector of strings
     for(unsigned i = 0; i < precVec.size(); i++){
-        //Triggers that we should begin pooping
+        //Triggers that we should begin popping
         if(precVec.at(i) == ")"){
             //Until the top element is ( we pop the stack
             while( tempStrStk.top() != "(" ){
@@ -38,12 +38,14 @@ void Parentheses::parse() {
                     // side of op) and newCmd(right side)
                     //Else do same as And with Or
                     if( op == "&&" ){
-                        Shell* newAnd = new And( shellPtr.top(), newCmd);
+                        //***********
+                        Shell* newAnd = new And(newCmd, shellPtr.top());
                         shellPtr.pop();
                         shellPtr.push(newAnd);
                     }
                     else{
-                        Shell* newOr = new Or( shellPtr.top(), newCmd);
+                        //*********
+                        Shell* newOr = new Or( newCmd,shellPtr.top());
                         shellPtr.pop();
                         shellPtr.push(newOr);
                     }
@@ -94,7 +96,11 @@ void Parentheses::parse() {
                         }
 
                     }
-                    //If next obj is another Command then 
+                    //If next obj is another Command then we creat a Command ptr
+                    //using string stack from the top and then pop string stack
+                    //Depending on op we creat Operator Class obj and pass in
+                    //param (cmdLeft, cmdRight)
+                    //Note: cmdRight is shellPtr.top() line: 60
                     else{
                         Shell* cmdLeft = new Command(tempStrStk.top());
                         tempStrStk.pop();
@@ -111,21 +117,28 @@ void Parentheses::parse() {
                     }
                 }
             }
+            //If string stack is not empty pop off one element
+            //Should pop off ) from string stack
             if(!tempStrStk.empty())
                 tempStrStk.pop();
         }
+        //Push vector element into string stack
         else{
             tempStrStk.push(precVec.at(i));
         }
     }
 
-//*****************
-// CHeck if temp stack still has operators
-//*****************
+//**************************************************
+// Check if string stack is empty
+//**************************************************
     while(!tempStrStk.empty()){
+        //If top element in stack is an Operator then go in here
         if(tempStrStk.top() == "&&" || tempStrStk.top() == "||"){
             string op = tempStrStk.top();
-            if(tempStrStk.size() == 1){
+
+            //If only element in stack is operator and shellPtr stack has 2+
+            //elements than we pop
+            if(tempStrStk.size() == 1 && shellPtr.size() >= 2){
                 if(op == "&&"){
                     Shell* right = shellPtr.top();
                     shellPtr.pop();
