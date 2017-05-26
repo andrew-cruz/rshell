@@ -9,11 +9,11 @@
 * Odd number of brackets for test command still doesn't work
 
 ### Rubric
-*5 points for well commented code
-*5 points for following style guidelines
-*20 points for sufficient test cases
-*40 points for test operator (including integration with precedence and past requirements)
-*30 points for precedence operators (including integration with test and past requirements)
+* 5 points for well commented
+* 5 points for following style guidelines
+* 20 points for sufficient test cases
+* 40 points for test operator (including integration with precedence and past requirements)
+* 30 points for precedence operators (including integration with test and past requirements)
 
 
 ## Authors
