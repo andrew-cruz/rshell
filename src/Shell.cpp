@@ -59,7 +59,7 @@ void Shell::parse(){
 				break;
 			}
 			//If substring contains && go create Shell* of type And and push back into queue
-			if( temp.find("&&") != string::npos ){
+			else if( temp.find("&&") != string::npos ){
 				Shell* tempAnd = new And(temp);
 				commands.push(tempAnd);
 			}
@@ -67,9 +67,10 @@ void Shell::parse(){
 			else if( temp.find("||") != string::npos){
 				Shell* tempOr = new Or(temp);
 				commands.push(tempOr);
-			} else if( (temp.find("test") != string::npos) ||
+			}
+			//If substring contains test or [] create a Shell* of type Test and push back into queue
+			else if( (temp.find("test") != string::npos) ||
 		 		( (temp.find("[") != string::npos) && (temp.find("]") != string::npos) ) ) {
-					// cout << "Test\n";
 				Shell* tempTest = new Test(temp);
 				commands.push(tempTest);
 			}

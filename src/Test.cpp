@@ -8,7 +8,7 @@
 #include "../header/Test.h"
 using namespace std;
 
-
+//	BUGS: odd num of []
 Test::Test() : Shell() {}
 
 Test::Test(string str) {
@@ -20,18 +20,18 @@ void Test::getCommand() {
 
 }
 void Test::parse(string strParse) {
-	//if beginning of string is "test", deletes it
-	//strParse.erase(strParse.find("["));
+	//if user inputs [test ... ], errors out
 	if( ( (strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) )
 		&& (strParse.find("test") != string::npos) ) {
 			perror("ERROR: Can't have both test and []\n");
 			exit(1);
 	}
-
+	//finds [], then deletes it
 	if( (strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) ) {
 		strParse.erase(strParse.find("["), 1);
 		strParse.erase(strParse.find("]"), 1);
 	}
+	//finds test, deletes it
 	if (strParse.find("test") != string::npos) {
 		strParse.erase(strParse.find("test"), strParse.find("test") + 4);
 	}
@@ -55,7 +55,7 @@ void Test::execute() {
 		testStr.erase(0, testStr.find("-e") + 2);
 		//puts null at end of char*
 		char* cstr = strdup(testStr.c_str());
-		//Get rid of whitespaces and semicolons
+		//Get rid of whitespaces
 		char* token = strtok(cstr, " ");
 		cstr = token;
 
@@ -85,7 +85,7 @@ void Test::execute() {
 		testStr.erase(0, testStr.find("-f") + 2);
 		//puts null at end of char*
 		char* cstr = strdup(testStr.c_str());
-		//Get rid of whitespaces and semicolons
+		//Get rid of whitespaces
 		char* token = strtok(cstr, " ");
 		cstr = token;
 		//similar
@@ -114,7 +114,7 @@ void Test::execute() {
 		testStr.erase(0, testStr.find("-d") + 2);
 		//puts null at end of char*
 		char* cstr = strdup(testStr.c_str());
-		//Get rid of whitespaces and semicolons
+		//Get rid of whitespaces
 		char* token = strtok(cstr, " ");
 		cstr = token;
 
