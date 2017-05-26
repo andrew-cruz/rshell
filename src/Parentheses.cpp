@@ -8,22 +8,48 @@ using namespace std;
 Parentheses::Parentheses() {}
 
 Parentheses::Parentheses(string str){
+    // Parentheses::parse(str);
+    Parentheses::setVector(str);
     Parentheses::parse(str);
+    Parentheses::parse();
+}
+
+void Parentheses::parse() {
+    stack<string> tempStrStk;
+
+    for(unsigned i = 0; i < precVec.size(); i++){
+        //POP OUT OF STACK UNTIL ReACHING (
+        if(v.at(i) == ")"){
+            //pop
+            tempStrStk.top();
+        }
+        else{
+            tempStrStk.push(precVec.at(i));
+        }
+    }
+
+
+
+
+
 }
 
 void Parentheses::parse(string str){
-    // cout << "Passes in str is " << str << endl;
+    for(unsigned i = 0; i < precVec.size(); i++){
+        cout << "precedenceStk[" << i << "] = " << precVec.at(i) << endl;
+    }
+}
 
-    stack<string> precedenceStk;
+void Parentheses::setVector(string str){
     string temp;
     for(unsigned i = 0; i < str.length(); i++){
         if( str.at(i) == '(' || str.at(i) == ')' ){
             if( !temp.empty() ){
-                precedenceStk.push(temp);
+                precVec.push_back(temp);
                 temp.clear();
             }
             temp = str.at(i);
-            precedenceStk.push(temp);
+            precVec.push_back(temp);
             temp.clear();
         }
         else{
@@ -32,12 +58,7 @@ void Parentheses::parse(string str){
     }
 
     if(!temp.empty()){
-        precedenceStk.push(temp);
-    }
-
-    while(!precedenceStk.empty()){
-        cout << precedenceStk.top() << endl;
-        precedenceStk.pop();
+        precVec.push_back(temp);
     }
 }
 
