@@ -24,11 +24,8 @@ void Shell::read(){
 	while(getline(cin,cmdLine)){
 		//Parses anything after #
 		Shell::parse(cmdLine);
-		//If exit is found sets cont to false
-		cont = Shell::cont();
 		//Parses user input
 		Shell::parse();
-		//Executes input
 		//Shell::getCommand();
 		Shell::execute();
 		if(!cont)
@@ -39,12 +36,9 @@ void Shell::read(){
 }
 
 void Shell::parse(){
-	if(cmdLine.find("exit") != string::npos){
-	    cmdLine.erase( cmdLine.find("exit"), cmdLine.size() - 1 );
-		if(cmdLine.size() == 1){
-			cmdLine.clear();
-		}
-	}
+
+
+	// cout << "cmdLine is \n" << cmdLine << endl;
 	//While commands are still in string
 	while(cmdLine.length() != 0) {
 		//If multiple commands found
@@ -52,11 +46,10 @@ void Shell::parse(){
 			//Store begining upto first semicolon of string into a substring
 			string temp = cmdLine.substr(0, cmdLine.find(";"));
 			//If substring contains test, creates Shell* of type Test and push back into queue
-			// cout << "Temp is " << temp << endl;
+			// cout << "cmdLine is " << cmdLine << endl;
 			if( temp.find('(') != string::npos ){
 				Shell* newParen = new Parentheses(temp);
 				commands.push(newParen);
-				break;
 			}
 			//If substring contains && go create Shell* of type And and push back into queue
 			else if( temp.find("&&") != string::npos ){
@@ -89,12 +82,6 @@ void Shell::parse(){
 	}
 }
 
-bool Shell::cont(){
-	if(cmdLine.find("exit") != string::npos)
-		return FOUND;
-	else
-		return NOTFOUND;
-}
 
 bool Shell::getSuccess(int index){
 	return false;
@@ -127,4 +114,6 @@ void Shell::parse(string strParse){
 		if(cmdLine.size() == 1)
 			cmdLine.clear();
 	}
+
+	// cout << "cmdLine is " << cmdLine << endl;
 }

@@ -51,6 +51,9 @@ bool Command::getSuccess(int index){
 }
 
 void Command::exec(){
+	if( strncmp( command[0], "exit", 4 )  == 0){
+		exit(1);
+	}
 	//Execute command
 	pid_t pid;
 	int status;
