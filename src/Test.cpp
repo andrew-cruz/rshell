@@ -24,14 +24,27 @@ void Test::parse(string strParse) {
 	if( ( (strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) )
 		&& (strParse.find("test") != string::npos) ) {
 			perror("ERROR: Can't have both test and []\n");
-			exit(1);
+			return;
+	}
+/*
+
+	if(!appFlag || spacecount > 2){
+
+}
+*/
+	// test e bin/rshell
+	//finds test, deletes it
+
+	if( (strParse.find("-") == string::npos) && (strParse.find(" ") != string::npos) ) {
+			strParse.erase(strParse.find("test"), strParse.find("test") + 4);
+		perror("ERROR: make sure you have a flag!\n");
+		return;
 	}
 	//finds [], then deletes it
 	if( (strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) ) {
 		strParse.erase(strParse.find("["), 1);
 		strParse.erase(strParse.find("]"), 1);
 	}
-	//finds test, deletes it
 	if (strParse.find("test") != string::npos) {
 		strParse.erase(strParse.find("test"), strParse.find("test") + 4);
 	}
@@ -139,7 +152,9 @@ void Test::execute() {
 		success = true;
 	} else {
 		perror("ERROR: INVALID FLAG!\n");
-		exit(1);
+		// exit(1);
+		// break;
+		return;
 	}
 }
 
