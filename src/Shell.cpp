@@ -31,8 +31,9 @@ void Shell::read(){
 		if(!cont)
 		    break;
 
-		cout << "CS100$ ";
+		cout << "\nCS100$ ";
 	}
+	//cout << endl;
 }
 
 void Shell::parse(){
