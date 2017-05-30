@@ -31,6 +31,7 @@ void Shell::read(){
 		cout << "Queue size is  " << commands.size() << endl;
 		Shell::execute();
 		cout << "CS100$ ";
+
 	}
 }
 
