@@ -16,21 +16,20 @@ using namespace std;
 Shell::Shell() : success(false) {}
 
 void Shell::read(){
-	bool cont = NOTFOUND;
+	// bool cont = NOTFOUND;
 
 	cout << "CS100$ ";
 
 	//While user input
 	while(getline(cin,cmdLine)){
 		//Parses anything after #
+		cout << "Executing command \" " << cmdLine  << " \""<< endl;
 		Shell::parse(cmdLine);
 		//Parses user input
 		Shell::parse();
 		//Shell::getCommand();
+		cout << "Queue size is  " << commands.size() << endl;
 		Shell::execute();
-		if(!cont)
-		    break;
-
 		cout << "CS100$ ";
 	}
 }

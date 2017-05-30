@@ -16,3 +16,4 @@ test -e bin/rshell; test -f bin/rshell
 # [bin/rshell]
 # [bin/rshell]]
 # test [-f bin/rshell]
+exit
