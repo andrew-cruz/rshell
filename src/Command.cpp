@@ -52,6 +52,7 @@ bool Command::getSuccess(int index){
 
 void Command::exec(){
 	if( strncmp( command[0], "exit", 4 )  == 0){
+		cout << endl;
 		exit(1);
 	}
 	//Execute command

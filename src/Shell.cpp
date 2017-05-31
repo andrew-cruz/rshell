@@ -16,7 +16,7 @@ using namespace std;
 Shell::Shell() : success(false) {}
 
 void Shell::read(){
-	bool cont = NOTFOUND;
+	// bool cont = NOTFOUND;
 
 	cout << "CS100$ ";
 
@@ -26,14 +26,10 @@ void Shell::read(){
 		Shell::parse(cmdLine);
 		//Parses user input
 		Shell::parse();
-		//Shell::getCommand();
+		//executes command line
 		Shell::execute();
-		if(!cont)
-		    break;
-
-		cout << "\nCS100$ ";
+		cout << "CS100$ ";
 	}
-	//cout << endl;
 }
 
 void Shell::parse(){
@@ -89,6 +85,7 @@ bool Shell::getSuccess(int index){
 }
 void Shell::getCommand() {
 	queue<Shell*> temp(commands);
+
 	while(!temp.empty()) {
 		temp.front()->getCommand();
 		temp.pop();

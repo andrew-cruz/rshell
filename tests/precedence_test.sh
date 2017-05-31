@@ -4,8 +4,7 @@ make clean
 make
 clear
 bin/rshell << starting program
-(echo hi && ls -l || ( ls -m && echo bye && ( ls -l || mkdir b) ) )
-(echo hi && ls -l || ( ls -m && echo bye && ( ls -l || mkdir b) ) ); (echo hi && ls -l || ( ls -m && echo bye && ( ls -l || mkdor b) ) ); (echo hi && ls -l || ( ls -m && echo bye && ( ls -l || mkdor b) ) )
-echo hi && (ls -l || mkdir hi); exit;
-
+(echo A && echo B) || (echo C && echo D)
+(echo this || echo doesnt) && echo work
+exit
 make clean
