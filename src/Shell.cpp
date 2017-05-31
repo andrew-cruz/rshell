@@ -23,15 +23,12 @@ void Shell::read(){
 	//While user input
 	while(getline(cin,cmdLine)){
 		//Parses anything after #
-		cout << "Executing command \" " << cmdLine  << " \""<< endl;
 		Shell::parse(cmdLine);
 		//Parses user input
 		Shell::parse();
-		//Shell::getCommand();
-		cout << "Queue size is  " << commands.size() << endl;
+		//executes command line
 		Shell::execute();
 		cout << "CS100$ ";
-
 	}
 }
 
@@ -88,6 +85,7 @@ bool Shell::getSuccess(int index){
 }
 void Shell::getCommand() {
 	queue<Shell*> temp(commands);
+
 	while(!temp.empty()) {
 		temp.front()->getCommand();
 		temp.pop();

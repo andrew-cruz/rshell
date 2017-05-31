@@ -38,13 +38,11 @@ void Parentheses::parse() {
                     // side of op) and newCmd(right side)
                     //Else do same as And with Or
                     if( op == "&&" ){
-                        //***********
                         Shell* newAnd = new And(newCmd, shellPtr.top());
                         shellPtr.pop();
                         shellPtr.push(newAnd);
                     }
                     else{
-                        //*********
                         Shell* newOr = new Or( newCmd,shellPtr.top());
                         shellPtr.pop();
                         shellPtr.push(newOr);
@@ -128,6 +126,8 @@ void Parentheses::parse() {
         }
     }
 
+
+
 //**************************************************
 // Check if string stack is empty
 //**************************************************
@@ -135,10 +135,9 @@ void Parentheses::parse() {
         //If top element in stack is an Operator then go in here
         if(tempStrStk.top() == "&&" || tempStrStk.top() == "||"){
             string op = tempStrStk.top();
-
             //If only element in stack is operator and shellPtr stack has 2+
             //elements than we pop
-            if(tempStrStk.size() == 1 && shellPtr.size() >= 2){
+            if(shellPtr.size() >= 2){
                 if(op == "&&"){
                     Shell* right = shellPtr.top();
                     shellPtr.pop();
@@ -152,11 +151,10 @@ void Parentheses::parse() {
                     shellPtr.pop();
                     Shell* left = shellPtr.top();
                     shellPtr.pop();
-                    Shell* newOr = new Or(left, right);
+                    Shell* newOr = new Or(left,right);
                     shellPtr.push(newOr);
                 }
             }
-
             tempStrStk.pop();
         }
         else{
@@ -165,13 +163,14 @@ void Parentheses::parse() {
             string op = tempStrStk.top();
             tempStrStk.pop();
             if(op == "&&"){
-                Shell* newAnd = new And(newCmd, shellPtr.top());
+                Shell* newAnd = new And(newCmd,shellPtr.top());
                 shellPtr.pop();
                 shellPtr.push(newAnd);
             }
             else{
                 Shell* newOr = new Or(newCmd,shellPtr.top());
                 shellPtr.pop();
+                newOr->getCommand();
                 shellPtr.push(newOr);
             }
         }
