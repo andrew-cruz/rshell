@@ -18,6 +18,7 @@ public:
     Parentheses();
     Parentheses(string);
     void parse();
+    void paraCheck(string);
     void parse(string);
     void left();
     void setVector(string);

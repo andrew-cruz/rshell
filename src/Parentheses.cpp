@@ -15,6 +15,22 @@ using namespace std;
 Parentheses::Parentheses() {}
 
 Parentheses::Parentheses(string str){
+    Parentheses::paraCheck(str);
+}
+
+void Parentheses::paraCheck(string str){
+    int counter = 0;
+    for(unsigned i = 0; i < str.length(); i++){
+        if(str.at(i) == '(' || str.at(i) == ')'){
+            counter++;
+        }
+    }
+
+    if(counter % 2 != 0){
+        cerr << "ERROR: INVALID AMMOUNT OF PARENTHESES\n";
+        return;
+    }
+
     Parentheses::parse(str);
     Parentheses::setVector(newCmds);
     Parentheses::parse();
@@ -27,7 +43,6 @@ void Parentheses::parse(string str){
         right = str.substr( 0 , str.find('(') );
         newCmds.erase( 0,str.find('(')  );
     }
-
 }
 
 
@@ -152,78 +167,87 @@ void Parentheses::parse() {
                           cmdRight = new Command(tempStrStk.top());
                       }
                     tempStrStk.pop();
-                    shellPtr.push(cmdRight);
-                    string op = tempStrStk.top();
-                    tempStrStk.pop();
-                    //If next obj is another Operator then we check what the
-                    //previous op was and creat approp Operator class for is
-                    //First create Operator for string op with param
-                    //(cmdRight,shellPtr.top()) then this become new cmdRight
-                    if( (tempStrStk.top() == "&&") || (tempStrStk.top() == "||") ){
-                        if(op == "&&"){
-                            Shell* newAnd = new And(cmdRight, shellPtr.top());
-                            shellPtr.pop();
-                            shellPtr.push(newAnd);
-                        }
-                        else{
-                            Shell* newOr = new Or(cmdRight,shellPtr.top());
-                            shellPtr.pop();
-                            shellPtr.push(newOr);
-                        }
-                        //Create new Operator class with tempOp and param being
-                        //(shellPtr.top(), strtok.top() ) and push that back
-                        //into stack
-                        string tempOp = tempStrStk.top();
-                        tempStrStk.pop();
 
 
-                        Shell* cmdR;
+                    if((tempStrStk.size() == 1) && (tempStrStk.top() == "(")) {
 
-                        if((tempStrStk.top().find("test") != string::npos) ||
-                          (tempStrStk.top().find('[') != string::npos)){
-                              cmdR = new Test(tempStrStk.top());
-                          }
-                          else{
-                              cmdR = new Command(tempStrStk.top());
-                          }
-                          tempStrStk.pop();
-
-                        if(tempOp == "&&"){
-                            Shell* newAnd = new And(shellPtr.top(), cmdR);
-                            shellPtr.push(newAnd);
-                        }
-                        else{
-                            Shell* newOr = new Or(shellPtr.top(), cmdR);
-                            shellPtr.push(newOr);
-                        }
-
+                        shellPtr.push(cmdRight);
                     }
-                    //If next obj is another Command then we creat a Command ptr
-                    //using string stack from the top and then pop string stack
-                    //Depending on op we creat Operator Class obj and pass in
-                    //param (cmdLeft, cmdRight)
-                    //Note: cmdRight is shellPtr.top() line: 60
                     else{
-                        Shell* cmdLeft;
 
-                        if((tempStrStk.top().find("test") != string::npos) ||
-                          (tempStrStk.top().find('[') != string::npos)){
-                              cmdLeft = new Test(tempStrStk.top());
-                          }
-                          else{
-                              cmdLeft = new Command(tempStrStk.top());
-                          }
-
+                        shellPtr.push(cmdRight);
+                        string op = tempStrStk.top();
                         tempStrStk.pop();
-                        if(op == "&&"){
-                            Shell* newAnd = new And(cmdLeft, shellPtr.top());
-                            shellPtr.pop();
-                            shellPtr.push(newAnd);
+                        //If next obj is another Operator then we check what the
+                        //previous op was and creat approp Operator class for is
+                        //First create Operator for string op with param
+                        //(cmdRight,shellPtr.top()) then this become new cmdRight
+                        if( (tempStrStk.top() == "&&") || (tempStrStk.top() == "||") ){
+                            if(op == "&&"){
+                                Shell* newAnd = new And(cmdRight, shellPtr.top());
+                                shellPtr.pop();
+                                shellPtr.push(newAnd);
+                            }
+                            else{
+                                Shell* newOr = new Or(cmdRight,shellPtr.top());
+                                shellPtr.pop();
+                                shellPtr.push(newOr);
+                            }
+                            //Create new Operator class with tempOp and param being
+                            //(shellPtr.top(), strtok.top() ) and push that back
+                            //into stack
+                            string tempOp = tempStrStk.top();
+                            tempStrStk.pop();
+
+
+                            Shell* cmdR;
+
+                            if((tempStrStk.top().find("test") != string::npos) ||
+                              (tempStrStk.top().find('[') != string::npos)){
+                                  cmdR = new Test(tempStrStk.top());
+                              }
+                              else{
+                                  cmdR = new Command(tempStrStk.top());
+                              }
+                              tempStrStk.pop();
+
+                            if(tempOp == "&&"){
+                                Shell* newAnd = new And(shellPtr.top(), cmdR);
+                                shellPtr.push(newAnd);
+                            }
+                            else{
+                                Shell* newOr = new Or(shellPtr.top(), cmdR);
+                                shellPtr.push(newOr);
+                            }
+
                         }
+                        //If next obj is another Command then we creat a Command ptr
+                        //using string stack from the top and then pop string stack
+                        //Depending on op we creat Operator Class obj and pass in
+                        //param (cmdLeft, cmdRight)
+                        //Note: cmdRight is shellPtr.top() line: 60
                         else{
-                            Shell* newOr = new Or(cmdLeft,shellPtr.top());
-                            shellPtr.pop();
-                            shellPtr.push(newOr);
+                            Shell* cmdLeft;
+
+                            if((tempStrStk.top().find("test") != string::npos) ||
+                              (tempStrStk.top().find('[') != string::npos)){
+                                  cmdLeft = new Test(tempStrStk.top());
+                              }
+                              else{
+                                  cmdLeft = new Command(tempStrStk.top());
+                              }
+
+                            tempStrStk.pop();
+                            if(op == "&&"){
+                                Shell* newAnd = new And(cmdLeft, shellPtr.top());
+                                shellPtr.pop();
+                                shellPtr.push(newAnd);
+                            }
+                            else{
+                                Shell* newOr = new Or(cmdLeft,shellPtr.top());
+                                shellPtr.pop();
+                                shellPtr.push(newOr);
+                            }
                         }
                     }
                 }
