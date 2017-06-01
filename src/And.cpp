@@ -38,7 +38,8 @@ void And::parse(string strParse){
 			} else if( temp.find("test") != string::npos ) {
 				Shell* tempTest = new Test(temp);
 				cmdAnd.push_back(tempTest);
-			} else if( (temp.find("[") != string::npos) && (temp.find("]") != string::npos) ) {
+			} else if( (temp.find("[") != string::npos) &&
+			 (temp.find("]") != string::npos) ) {
 				Shell* tempTest = new Test(temp);
 				cmdAnd.push_back(tempTest);
 			}

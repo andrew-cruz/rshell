@@ -26,7 +26,6 @@ void Or::getCommand() {
 
 void Or::parse(string strParse){
 	string parsingStr = strParse;
-
 	while(parsingStr.length() != 0){
 		if(parsingStr.find("||") != string::npos){
 			string temp = parsingStr.substr(0, parsingStr.find("||"));
@@ -43,7 +42,7 @@ void Or::parse(string strParse){
 				cmdOr.push_back(tempTest);
 			}
 			//If substring is just a simple command create a Shell* of type Command and push back into vector
-			else{
+			else {
 				Shell* tempCmd = new Command(temp);
 				cmdOr.push_back(tempCmd);
 			}
