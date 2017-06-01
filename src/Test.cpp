@@ -40,7 +40,7 @@ void Test::parse(string strParse) {
 	}
 	//finds test then deletes it
 	if (strParse.find("test") != string::npos) {
-		strParse.erase(strParse.find("test "), strParse.find("test ") + 5);
+		strParse.erase(strParse.find("test"), strParse.find("test") + 4);
 	}
 
 	string tempFlag;
