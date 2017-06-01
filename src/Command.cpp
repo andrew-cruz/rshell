@@ -20,10 +20,6 @@ void Command::parse(string strParse) {
 	cmd = strParse;
 }
 
-void Command::getCommand() {
-	cout << cmd << " ";
-}
-
 void Command::execute(){
 	//Copy cmd c string into char * str
 	// cout << "We are executing " << cmd << endl;

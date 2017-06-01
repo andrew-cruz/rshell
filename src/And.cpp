@@ -15,15 +15,6 @@ And::And(Shell* left, Shell* right){
 	cmdAnd.push_back(left);
 	cmdAnd.push_back(right);
 }
-void And::getCommand() {
-	for(unsigned i = 0; i < cmdAnd.size(); ++i) {
-		if( i != 0 )
-			cout << " && ";
-		cmdAnd.at(i)->getCommand();
-		if(i == 0)
-			cout << " && ";
-	}
-}
 
 void And::parse(string strParse){
 	string parsingStr = strParse;

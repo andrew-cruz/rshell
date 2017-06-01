@@ -11,7 +11,6 @@ public:
     Or(string);
     Or(Shell*,Shell*);
     //Inherited
-    void getCommand();
     void parse(string);
     void execute();
     bool getSuccess(int);

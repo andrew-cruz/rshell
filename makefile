@@ -1,4 +1,4 @@
-FLAGS = -std=c++11 -Wall -Werror -ansi -pedantic
+FLAGS = -std=c++11 -Wall -Werror -pedantic
 COMP = g++
 
 all:

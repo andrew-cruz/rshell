@@ -321,7 +321,6 @@ void Parentheses::parse() {
             else {
                 Shell* newOr = new Or(newCmd,shellPtr.top());
                 shellPtr.pop();
-                newOr->getCommand();
                 shellPtr.push(newOr);
             }
         }

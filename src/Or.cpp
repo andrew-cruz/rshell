@@ -14,15 +14,6 @@ Or::Or(Shell* left, Shell* right){
 	cmdOr.push_back(left);
 	cmdOr.push_back(right);
 }
-void Or::getCommand() {
-	for (unsigned i = 0; i < cmdOr.size(); ++i) {
-		if(i != 0)
-			cout << " || ";
-			cmdOr.at(i)->getCommand();
-		if(i == 0)
-			cout << " || ";
-	}
-}
 
 void Or::parse(string strParse){
 	string parsingStr = strParse;

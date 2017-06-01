@@ -15,10 +15,6 @@ Test::Test(string str) {
 	Test::parse(str);
 }
 
-void Test::getCommand() {
-	cout << testStr << endl;
-
-}
 void Test::parse(string strParse) {
 	//if user inputs [test ... ], errors out
 	if ( ( ( strParse.find("[") != string::npos) &&
@@ -189,7 +185,7 @@ void Test::execute() {
 
 		if ( (pid = fork()) < 0) {
 			cerr << "ERROR: forking failed\n";
-			success = false;
+			success =  false;
 			exit(1);
 			// return false;
 		}
@@ -210,6 +206,5 @@ void Test::execute() {
 }
 
 bool Test::getSuccess(int index) {
-	string temp;
-	return temp;
+	return success;
 }

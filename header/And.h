@@ -11,7 +11,6 @@ public:
 	And(string);
 	And(Shell*,Shell*);
 	//Inherited
-	void getCommand();
 	void parse(string);
 	void execute();
 	bool getSuccess(int);
