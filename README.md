@@ -6,9 +6,10 @@
 * Added a parentheses class where commands and arguments have precedence.
 
 ## Known bugs
-* Odd number of brackets for test command still doesn't work
 * When manually inputting our test cases, our program doesn't output extra lines which is fine
 * But, when we use the shell test cases, our program outputs extra lines and no endl's are evident
+* When inputting a single command in parentheses the program segfaults
+* When inputting multiple commands the order in which the commands are executed is reversed due to the way we push and pop into our stack 
 
 ### Rubric
 * 5 points for well commented
