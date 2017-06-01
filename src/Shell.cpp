@@ -16,10 +16,7 @@ using namespace std;
 Shell::Shell() : success(false) {}
 
 void Shell::read(){
-	// bool cont = NOTFOUND;
-
 	cout << "CS100$ ";
-
 	//While user input
 	while(getline(cin,cmdLine)){
 		//Parses anything after #
@@ -33,9 +30,6 @@ void Shell::read(){
 }
 
 void Shell::parse(){
-
-
-	// cout << "cmdLine is \n" << cmdLine << endl;
 	//While commands are still in string
 	while(cmdLine.length() != 0) {
 		//If multiple commands found
@@ -43,7 +37,6 @@ void Shell::parse(){
 			//Store begining upto first semicolon of string into a substring
 			string temp = cmdLine.substr(0, cmdLine.find(";"));
 			//If substring contains test, creates Shell* of type Test and push back into queue
-			// cout << "cmdLine is " << cmdLine << endl;
 			if( temp.find('(') != string::npos ){
 				Shell* newParen = new Parentheses(temp);
 				commands.push(newParen);
@@ -90,7 +83,6 @@ void Shell::getCommand() {
 		temp.front()->getCommand();
 		temp.pop();
 	}
-
 }
 
 void Shell::execute(){
