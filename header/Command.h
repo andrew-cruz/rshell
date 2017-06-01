@@ -8,7 +8,6 @@
 class Command : public Shell{
 protected:
 	string cmd;
-	bool success;
 	char* command[SIZE_OF_ARRAY];
 public:
 	Command();
@@ -17,6 +16,7 @@ public:
 	void read();
 	void parse();
 	void parse(string);
+	void getCommand();
 	void execute();
 	bool getSuccess(int);
 	//Unique to Class
