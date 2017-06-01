@@ -238,49 +238,7 @@ void Parentheses::parse() {
             tempStrStk.push(precVec.at(i));
         }
     }
-//
-//     stack<string> temp;
-//     while(!tempStrStk.empty()){
-//         temp.push(tempStrStk.top());
-//         tempStrStk.pop();
-//     }
-//     tempStrStk.swap(temp);
-//
-// // cout << "\n***********************************************************\n";
-//     // while(!tempStrStk.empty()){
-//     //     cout << tempStrStk.top() << endl;
-//     //     // temp.push(tempStrStk.top());
-//     //     tempStrStk.pop();
-//     // }
-// // cout << "\n***********************************************************\n";
-//     queue<Shell*> newQueue;
-//     stack<Shell*> temp2;
-//
-//     while(!shellPtr.empty()){
-//         temp2.push(shellPtr.top());
-//         // newQueue.push(shellPtr.top());
-//         shellPtr.pop();
-//     }
-//     shellPtr.swap(temp2);
-// //
-// // cout << "\n***********************************************************\n";
-//     while(!shellPtr.empty()){
-//         // temp2.push(shellPtr.top());
-//         newQueue.push(shellPtr.top());
-//         shellPtr.pop();
-//     }
-// //
-// // while(!newQueue.empty()){
-// //     newQueue.front()->getCommand();
-// //     cout << endl;
-// //     // temp.push(tempStrStk.top());
-// //     newQueue.pop();
-// // }
-// // cout << "\n***********************************************************\n";
-// //**************************************************
-// // Check if string stack is empty
-// //**************************************************
-//     /*
+
     while(!tempStrStk.empty()){
         //If top element in stack is an Operator then go in here
         if(tempStrStk.top() == "&&" || tempStrStk.top() == "||"){
@@ -336,76 +294,8 @@ void Parentheses::parse() {
         }
     }
 
-//
-//
-//     while(!tempStrStk.empty()){
-//         cout << "*****************\n";
-//         cout << "tempStrStk.top is  " << tempStrStk.top() << endl;
-//         cout << "tempStrStk size is " << tempStrStk.size() << endl;
-//
-//         if(tempStrStk.top() == "&&" || tempStrStk.top() == "||"){
-//             cout << "if\n";
-//             string op = tempStrStk.top();
-//             cout << "Op is " << op << endl;
-//             tempStrStk.pop();
-//
-//             Shell* right;
-//             Shell* left;
-//
-//             if(tempStrStk.size() > 1 && !( tempStrStk.top() == "&&" || tempStrStk.top() == "||" ) ){
-//                 cout << "Inner if\n";
-//
-//                 right = new Command(tempStrStk.top());
-//                 tempStrStk.pop();
-//                 left = newQueue.front();
-//                 newQueue.pop();
-//
-//                 if(op == "&&"){
-//                     Shell* newAnd = new And(left,right);
-//                     newQueue.push(newAnd);
-//                 }
-//                 else{
-//                     Shell* newOr = new Or(left,right);
-//                     newQueue.push(newOr);
-//                 }
-//             }
-//             else{
-//                 cout << "inner else\n";
-//                 right = newQueue.front();
-//                 newQueue.pop();
-//                 left = newQueue.back();
-//                 if(op == "&&"){
-//                     Shell* newAnd = new And(left,right);
-//                     newQueue.back() = newAnd;
-//                 }
-//                 else{
-//                     Shell* newOr = new Or(left,right);
-//                     newQueue.back() = newOr;
-//                 }
-//             }
-//         }
-//         else{
-//             cout << "Command\n";
-//             break;
-//         }
-//     }
-//
     Parentheses::left();
 
-    // stack<string> tempStrStk;
-    // //Iterate through the entire vector of strings
-    // for(unsigned i = 0; i < precVec.size(); i++){
-    //     //Triggers that we should begin popping
-    //     if(precVec.at(i) == ")"){
-    //         //Until the top element is ( we pop the stack
-    //         Shell* left;
-    //         Shell* right;
-    //         string op;
-    //         while( tempStrStk.top() != "(" ){
-    //
-    //         }
-    //     }
-    // }
 }
 
 void Parentheses::setVector(string str){
@@ -448,9 +338,6 @@ void Parentheses::setVector(string str){
         precVec.push_back(temp);
     }
 
-    // for(unsigned i = 0; i < precVec.size(); i++){
-    //     cout << precVec.at(i) << endl;
-    // }
 }
 
 void Parentheses::execute(){
