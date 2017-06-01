@@ -10,6 +10,7 @@ using namespace std;
 class Parentheses : public Shell{
 private:
     string newCmds;
+    string right;
     vector<string> precVec;
     stack<Shell*> shellPtr;
 public:
@@ -18,6 +19,7 @@ public:
     Parentheses(string);
     void parse();
     void parse(string);
+    void left();
     void setVector(string);
     void execute();
     string getNewCmd();
