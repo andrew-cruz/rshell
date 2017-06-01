@@ -3,6 +3,7 @@
 #include <string>
 #include <sys/stat.h>
 #include <cstdlib>
+#include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include "../header/Test.h"
@@ -21,40 +22,72 @@ void Test::getCommand() {
 }
 void Test::parse(string strParse) {
 	//if user inputs [test ... ], errors out
-	if( ( (strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) )
+	if( ( ( strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) )
 		&& (strParse.find("test") != string::npos) ) {
-			perror("ERROR: Can't have both test and []\n");
+			cerr << "ERROR: Can't have both test and []\n";
 			return;
-	}
-/*
-
-	if(!appFlag || spacecount > 2){
-
-}
-*/
-	// test e bin/rshell
-	//finds test, deletes it
-
-	if( (strParse.find("-") == string::npos) && (strParse.find(" ") != string::npos) ) {
-			strParse.erase(strParse.find("test"), strParse.find("test") + 4);
-		perror("ERROR: make sure you have a flag!\n");
-		return;
 	}
 	//finds [], then deletes it
 	if( (strParse.find("[") != string::npos) && (strParse.find("]") != string::npos) ) {
 		strParse.erase(strParse.find("["), 1);
 		strParse.erase(strParse.find("]"), 1);
 	}
+	//finds excess [], errors out
+	if( (strParse.find("[") != string::npos) || (strParse.find("]") != string::npos) ) {
+		cerr << "ERROR: excess amount of brackets!\n";
+		return;
+	}
+	//finds test then deletes it
 	if (strParse.find("test") != string::npos) {
-		strParse.erase(strParse.find("test"), strParse.find("test") + 4);
+		strParse.erase(strParse.find("test "), strParse.find("test ") + 5);
 	}
 
-	//if no "-" is found, appends it to the beginning
-	if(strParse.find("-") == string::npos) {
-	 	string dashE = "-e ";
-	 	strParse.insert(0,dashE);
-	 }
-	testStr = strParse;
+	string tempFlag;
+	string tempPath;
+
+	//  cout << "\t1.strParse:" << strParse << endl;
+	for(unsigned i = 0; i < strParse.length(); ++i) {
+		if(strParse.at(i) != ' ')
+			tempFlag += (strParse.at(i));
+		else
+			break;
+	}
+	strParse.erase(0,strParse.find(tempFlag) + tempFlag.length());
+
+	tempPath = strParse;
+	// cout << "\t2.strParse:" << strParse << endl;
+	// cout << "tempFlag:" << tempFlag << endl;
+	// cout << "tempPath:" << tempPath  << "." << endl;
+	if(tempPath == " ") {
+		tempPath.clear();
+	}
+
+	if(tempPath.empty()) {
+		strParse = "";
+		tempPath = tempFlag;
+		tempFlag = "-e";
+		strParse = tempFlag + " " +tempPath;
+	}
+	// cout << "\t3.strParse:" << strParse << endl;
+
+	if(tempFlag == "-e") {
+		strParse = "";
+		strParse = tempFlag + " " + tempPath;
+	} else if(tempFlag == "-d") {
+		strParse = "";
+		strParse = tempFlag + " " + tempPath;
+	} else if(tempFlag == "-f") {
+		strParse = "";
+		strParse = tempFlag + " " + tempPath;
+	} else {
+		cerr << "ERROR: INVALID FLAG!\n";
+		testStr = "";
+		return;
+	}
+
+
+	// cout << "\t4.strParse:" << strParse << endl;
+	 testStr = strParse;
 }
 
 void Test::execute() {
@@ -73,7 +106,7 @@ void Test::execute() {
 		cstr = token;
 
 		if ( (pid = fork()) < 0) {
-			perror ("ERROR: forking failed\n");
+			cerr << "ERROR: forking failed\n";
 			success = false;
 			exit(1);
 			// return false;
@@ -103,7 +136,7 @@ void Test::execute() {
 		cstr = token;
 		//similar
 		if ( (pid = fork()) < 0) {
-			perror ("ERROR: forking failed\n");
+			cerr << "ERROR: forking failed\n";
 			success = false;
 			exit(1);
 			// return false;
@@ -132,7 +165,7 @@ void Test::execute() {
 		cstr = token;
 
 		if ( (pid = fork()) < 0) {
-			perror ("ERROR: forking failed\n");
+			cerr << "ERROR: forking failed\n";
 			success = false;
 			exit(1);
 			// return false;
@@ -150,11 +183,6 @@ void Test::execute() {
 			while (waitpid(-1, &status, 0) != pid) {}
 		}
 		success = true;
-	} else {
-		perror("ERROR: INVALID FLAG!\n");
-		// exit(1);
-		// break;
-		return;
 	}
 }
 

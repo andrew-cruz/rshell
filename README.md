@@ -7,6 +7,8 @@
 
 ## Known bugs
 * Odd number of brackets for test command still doesn't work
+* When manually inputting our test cases, our program doesn't output extra lines which is fine
+* But, when we use the shell test cases, our program outputs extra lines and no endl's are evident
 
 ### Rubric
 * 5 points for well commented
