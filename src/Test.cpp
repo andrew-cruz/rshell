@@ -21,20 +21,20 @@ void Test::getCommand() {
 }
 void Test::parse(string strParse) {
 	//if user inputs [test ... ], errors out
-	if( ( ( strParse.find("[") != string::npos) &&
+	if ( ( ( strParse.find("[") != string::npos) &&
 		(strParse.find("]") != string::npos) )
 			&& (strParse.find("test") != string::npos) ) {
 			cerr << "ERROR: Can't have both test and []\n";
 			return;
 	}
 	//finds [], then deletes it
-	if( (strParse.find("[") != string::npos) &&
+	if ( (strParse.find("[") != string::npos) &&
 		(strParse.find("]") != string::npos) ) {
 			strParse.erase(strParse.find("["), 1);
 			strParse.erase(strParse.find("]"), 1);
 	}
 	//finds excess [], errors out
-	if( (strParse.find("[") != string::npos) ||
+	if ( (strParse.find("[") != string::npos) ||
 		(strParse.find("]") != string::npos) ) {
 			cerr << "ERROR: excess amount of brackets!\n";
 			return;
@@ -47,23 +47,23 @@ void Test::parse(string strParse) {
 	string tempFlag;
 	string tempPath;
 	//finds whitespace, deletes it
-	while(strParse.at(0) == ' ') {
-		if(!strParse.empty()) {
+	while (strParse.at(0) == ' ') {
+		if (!strParse.empty() ) {
 			strParse.erase(0,1);
 		}
 	}
 	//parses through user input, distinguishes flag
-	for(unsigned i = 0; i < strParse.length(); ++i ) {
-		if(strParse.at(i) != ' ')
-			tempFlag += (strParse.at(i));
+	for (unsigned i = 0; i < strParse.length(); ++i ) {
+		if (strParse.at(i) != ' ')
+			tempFlag += (strParse.at(i) );
 		else
 			break;
 	}
 
 	//erases whitespace found after the flag
 	unsigned j = 0;
-	while(j < strParse.length() ) {
-		if(strParse.at(j) != '-' && strParse.at(j) == ' ')
+	while (j < strParse.length() ) {
+		if (strParse.at(j) != '-' && strParse.at(j) == ' ')
 			strParse.erase(0,1);
 		++j;
 	}
@@ -71,37 +71,37 @@ void Test::parse(string strParse) {
 	strParse.erase(0,strParse.find(tempFlag) + tempFlag.length());
 
 	tempPath = strParse;
-	if(tempPath == " ") {
+	if (tempPath == " ") {
 		tempPath.clear();
 	}
 
 	//if within that path, a flag is hidden then distinguishes flag
-	if(tempPath.find("-") != string::npos) {
-		for(unsigned i = 0; i < tempPath.length(); ++i) {
-			if(tempPath.at(i) != ' ')
+	if (tempPath.find("-") != string::npos) {
+		for (unsigned i = 0; i < tempPath.length(); ++i) {
+			if (tempPath.at(i) != ' ')
 				tempFlag += (tempPath.at(i));
 			else
 				break;
 		}
 		//separates flag from path
 		tempPath.erase(0,tempPath.find(tempFlag) + tempFlag.length());
-	} else if(tempFlag.empty()) {	//if either flag or path is empty, append -e
+	} else if (tempFlag.empty()) {	//if either flag or path is empty, append -e
 		tempFlag = "-e";
 		strParse = tempFlag + " " + strParse;
-	} else if(tempPath.empty()) {
+	} else if (tempPath.empty()) {
 		strParse = "";
 		tempPath = tempFlag;
 		tempFlag = "-e";
 		strParse = tempFlag + " " +tempPath;
 	}
 
-	if(tempFlag == "-e") { //adds flag and path to strParse
+	if (tempFlag == "-e") { //adds flag and path to strParse
 		strParse = "";
 		strParse = tempFlag + " " + tempPath;
-	} else if(tempFlag == "-d") {
+	} else if (tempFlag == "-d") {
 		strParse = "";
 		strParse = tempFlag + " " + tempPath;
-	} else if(tempFlag == "-f") {
+	} else if (tempFlag == "-f") {
 		strParse = "";
 		strParse = tempFlag + " " + tempPath;
 	} else {
@@ -118,7 +118,7 @@ void Test::execute() {
 	int status;
 	struct stat sb;
 
-	if(testStr.find("-e") != string::npos) {
+	if (testStr.find("-e") != string::npos) {
 		//checks if file/path exists
 		//deletes -e so file/path can be provided
 		testStr.erase(0, testStr.find("-e") + 2);
@@ -128,7 +128,7 @@ void Test::execute() {
 		char* token = strtok(cstr, " ");
 		cstr = token;
 
-		if ( (pid = fork()) < 0) {
+		if ( (pid = fork() ) < 0) {
 			cerr << "ERROR: forking failed\n";
 			success = false;
 			exit(1);
