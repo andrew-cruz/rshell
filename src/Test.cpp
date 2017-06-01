@@ -3,6 +3,8 @@
 #include <string>
 #include <sys/stat.h>
 #include <cstdlib>
+#include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
