@@ -95,7 +95,7 @@ void Test::parse(string strParse) {
 		strParse = tempFlag + " " +tempPath;
 	}
 
-	if(tempFlag == "-e") {
+	if(tempFlag == "-e") { //adds flag and path to strParse
 		strParse = "";
 		strParse = tempFlag + " " + tempPath;
 	} else if(tempFlag == "-d") {
