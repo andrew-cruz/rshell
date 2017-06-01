@@ -15,35 +15,34 @@ Or::Or(Shell* left, Shell* right){
 	cmdOr.push_back(right);
 }
 void Or::getCommand() {
-	for(unsigned i = 0; i < cmdOr.size(); ++i) {
-		if(i != 0 )
+	for (unsigned i = 0; i < cmdOr.size(); ++i) {
+		if(i != 0)
 			cout << " || ";
-		cmdOr.at(i)->getCommand();
-		if( i == 0)
+			cmdOr.at(i)->getCommand();
+		if(i == 0)
 			cout << " || ";
 	}
 }
 
 void Or::parse(string strParse){
 	string parsingStr = strParse;
-
-	while(parsingStr.length() != 0){
-		if(parsingStr.find("||") != string::npos){
+	while (parsingStr.length() != 0){
+		if (parsingStr.find("||") != string::npos){
 			string temp = parsingStr.substr(0, parsingStr.find("||"));
 			//If substring contains || create a Shell* of type Or and push back into vector
-			if( temp.find("&&") != string::npos){
+			if (temp.find("&&") != string::npos){
 				Shell* tempAnd = new And(temp);
 				cmdOr.push_back(tempAnd);
-			} else if( temp.find("test") != string::npos ){
+			} else if (temp.find("test") != string::npos) {
 				Shell* tempTest = new Test(temp);
 				cmdOr.push_back(tempTest);
-			} else if( (temp.find("[") != string::npos) &&
+			} else if ( (temp.find("[") != string::npos) &&
 				(temp.find("]") != string::npos) ) {
 				Shell* tempTest = new Test(temp);
 				cmdOr.push_back(tempTest);
 			}
 			//If substring is just a simple command create a Shell* of type Command and push back into vector
-			else{
+			else {
 				Shell* tempCmd = new Command(temp);
 				cmdOr.push_back(tempCmd);
 			}
@@ -58,15 +57,14 @@ void Or::parse(string strParse){
 }
 
 void Or::execute(){
-	for(unsigned i = 0; i < cmdOr.size(); i++) {
-		// cout << "Or execute\n";
+	for (unsigned i = 0; i < cmdOr.size(); i++) {
 		cmdOr.at(i)->execute();
-		if( cmdOr.at(i)->getSuccess(i) ){
+		if (cmdOr.at(i)->getSuccess(i) ){
 			break;
 		}
 	}
 }
 
-bool Or::getSuccess(int index){
+bool Or::getSuccess(int index) {
 	return cmdOr.at(index)->getSuccess(index);
 }
