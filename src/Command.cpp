@@ -16,25 +16,26 @@ Command::Command(string str) {
 	Command::parse(str);
 }
 
-void Command::read() {}
-
-void Command::parse() {}
-
 void Command::parse(string strParse) {
 	cmd = strParse;
 }
 
+void Command::getCommand() {
+	cout << cmd << " ";
+}
+
 void Command::execute(){
 	//Copy cmd c string into char * str
+	// cout << "We are executing " << cmd << endl;
 	char* str = strdup(cmd.c_str());
-	//Get rid of whitespaces and semicolons
-	char* token = strtok(str, " ;");
+	//Get rid of whitespaces, semicolons, and apostrophes
+	char* token = strtok(str, " ;\"");
 	//Used to traverse Command
 	int i  = 0;
 	//Used to traverse str from white space to white space
 	while(token != NULL){
 		command[i] = token;
-		token = strtok(NULL, " ;");
+		token = strtok(NULL, " ;\"");
 		i++;
 	}
 	//Set last element equal to NULL
@@ -43,7 +44,17 @@ void Command::execute(){
 	Command::exec();
 }
 
+
+
+bool Command::getSuccess(int index){
+	return success;
+}
+
 void Command::exec(){
+	if( strncmp( command[0], "exit", 4 )  == 0){
+		cout << endl;
+		exit(1);
+	}
 	//Execute command
 	pid_t pid;
 	int status;
@@ -71,12 +82,4 @@ void Command::exec(){
 	}
 
 	success = true;
-}
-
-bool Command::getSuccess(int index){
-	return getSuc();
-}
-
-bool Command::getSuc(){
-	return success;
 }

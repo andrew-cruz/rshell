@@ -1,7 +1,9 @@
 #include <iostream>
+#include <vector>
 #include "../header/And.h"
 #include "../header/Or.h"
 #include "../header/Command.h"
+#include "../header/Test.h"
 
 And::And() : Shell() {}
 
@@ -9,9 +11,19 @@ And::And(string str) {
 	And::parse(str);
 }
 
-void And::read() {}
-
-void And::parse() {}
+And::And(Shell* left, Shell* right){
+	cmdAnd.push_back(left);
+	cmdAnd.push_back(right);
+}
+void And::getCommand() {
+	for(unsigned i = 0; i < cmdAnd.size(); ++i) {
+		if( i != 0 )
+			cout << " && ";
+		cmdAnd.at(i)->getCommand();
+		if(i == 0)
+			cout << " && ";
+	}
+}
 
 void And::parse(string strParse){
 	string parsingStr = strParse;
@@ -23,16 +35,23 @@ void And::parse(string strParse){
 			if( temp.find("||") != string::npos){
 				Shell* tempOr = new Or(temp);
 				cmdAnd.push_back(tempOr);
+			} else if( temp.find("test") != string::npos ) {
+				Shell* tempTest = new Test(temp);
+				cmdAnd.push_back(tempTest);
+			} else if( (temp.find("[") != string::npos) &&
+			 (temp.find("]") != string::npos) ) {
+				Shell* tempTest = new Test(temp);
+				cmdAnd.push_back(tempTest);
 			}
 			//If substring is just a simple command create a Shell* of type Command and push back into vector
-			else{
+			else {
 				Shell* tempCmd = new Command(temp);
 				cmdAnd.push_back(tempCmd);
 			}
 			//Erases the substring and reduces the string down
 			parsingStr.erase( 0, parsingStr.find("&&") + 2 );
 		}
-		else{
+		else {
 			//Append && to back of string so that it goes into if statement and no need to recopy same code
 			parsingStr.append("&&");
 		}
@@ -41,6 +60,7 @@ void And::parse(string strParse){
 
 void And::execute(){
 	for(unsigned i = 0; i < cmdAnd.size(); i++) {
+		// cout << "And execute\n";
 		cmdAnd.at(i)->execute();
 	}
 }
