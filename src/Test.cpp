@@ -18,6 +18,10 @@ Test::Test(string str) {
 	Test::parse(str);
 }
 
+void Test::getCommand() {
+	cout << testStr << endl;
+
+}
 void Test::parse(string strParse) {
 	//if user inputs [test ... ], errors out
 	if ( ( ( strParse.find("[") != string::npos) &&
@@ -40,7 +44,7 @@ void Test::parse(string strParse) {
 	}
 	//finds test then deletes it
 	if (strParse.find("test") != string::npos) {
-		strParse.erase(strParse.find("test "), strParse.find("test ") + 5);
+		strParse.erase(strParse.find("test"), strParse.find("test") + 4);
 	}
 
 	string tempFlag;
@@ -188,7 +192,7 @@ void Test::execute() {
 
 		if ( (pid = fork()) < 0) {
 			cerr << "ERROR: forking failed\n";
-			success =  false;
+			success = false;
 			exit(1);
 			// return false;
 		}
@@ -209,5 +213,5 @@ void Test::execute() {
 }
 
 bool Test::getSuccess(int index) {
-	return success;
+    return success;
 }

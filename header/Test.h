@@ -9,13 +9,11 @@ using namespace std;
 class Test : public Shell {
     protected:
         string testStr;
-        bool success;
     public:
     	Test();
     	Test(string);
     	//Inherited
-    	void read();
-    	void parse();
+        void getCommand();
     	void parse(string);
     	void execute();
     	bool getSuccess(int);
