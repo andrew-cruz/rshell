@@ -17,3 +17,4 @@ test bin/hellopatrick
 [bin/rshell]
 [bin/rshell]]
 test [-f bin/rshell]
+exit
