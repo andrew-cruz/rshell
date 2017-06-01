@@ -8,8 +8,6 @@
 #include <iostream>
 #include <stack>
 #include <queue>
-#include <string>
-#include <string.h>
 
 using namespace std;
 
@@ -29,11 +27,13 @@ void Parentheses::paraCheck(string str) {
             counter++;
         }
     }
+
     //If odd number fo parenthesis then we cerr
     if (counter % 2 != 0) {
         cerr << "ERROR: INVALID AMMOUNT OF PARENTHESES\n";
         return;
     }
+
     //else we continue with parsing
     Parentheses::parse(str);
     Parentheses::setVector(newCmds);
@@ -294,11 +294,10 @@ void Parentheses::parse() {
             }
             tempStrStk.pop();
         }
-        //If top element in stack is of type Command then wego in here
+        //If top element in stack in of type Command
         else {
             Shell* newCmd;
-            //If the top element is test then we create test obj else we
-            //create normal command obj
+
             if ((tempStrStk.top().find("test") != string::npos) ||
               (tempStrStk.top().find('[') != string::npos)) {
                   newCmd = new Test(tempStrStk.top());
@@ -311,8 +310,6 @@ void Parentheses::parse() {
 
             string op = tempStrStk.top();
             tempStrStk.pop();
-            //Use the newCmd and the top of shellPtr stack to create the
-            //appropiate obj as defined by op
             if (op == "&&") {
                 Shell* newAnd = new And(newCmd,shellPtr.top());
                 shellPtr.pop();
@@ -321,19 +318,17 @@ void Parentheses::parse() {
             else {
                 Shell* newOr = new Or(newCmd,shellPtr.top());
                 shellPtr.pop();
+                newOr->getCommand();
                 shellPtr.push(newOr);
             }
         }
     }
-    //Add the left part of the command that we parsed off in parse(str) function
     Parentheses::left();
 }
 
-//Creates the vector that we create the stack from
 void Parentheses::setVector(string str){
     string temp;
-    //Strings that are "(" "&&" "||" ")" get there own index in the vector
-    //While everything else share index allocation
+
     for (unsigned i = 0; i < str.length(); i++) {
         if(str.at(i) == '(' || str.at(i) == ')'){
             if (temp == " ") {
@@ -373,7 +368,6 @@ void Parentheses::setVector(string str){
 
 }
 
-//Executes the stack
 void Parentheses::execute() {
     while (!shellPtr.empty()) {
         shellPtr.top()->execute();
@@ -381,7 +375,6 @@ void Parentheses::execute() {
     }
 }
 
-//Return the string member function
 string Parentheses::getNewCmd() {
     return newCmds;
 }

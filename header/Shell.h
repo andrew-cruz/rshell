@@ -9,15 +9,18 @@ using namespace std;
 class Shell{
 protected:
 	string cmdLine;
+	bool success;
 	queue<Shell*> commands;
 public:
 	Shell();
 	void read();
 	void parse();
 	bool cont();
+	virtual bool getSuccess(int);
+	virtual void getCommand();
+	virtual void execute();
+	virtual string getNewCmd();
 	virtual void parse(string a) = 0;
-	virtual void execute() = 0;
-	virtual bool getSuccess(int) = 0;
 };
 
 
