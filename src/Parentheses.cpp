@@ -27,13 +27,11 @@ void Parentheses::paraCheck(string str) {
             counter++;
         }
     }
-
     //If odd number fo parenthesis then we cerr
     if (counter % 2 != 0) {
         cerr << "ERROR: INVALID AMMOUNT OF PARENTHESES\n";
         return;
     }
-
     //else we continue with parsing
     Parentheses::parse(str);
     Parentheses::setVector(newCmds);
