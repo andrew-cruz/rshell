@@ -210,5 +210,6 @@ void Test::execute() {
 }
 
 bool Test::getSuccess(int index) {
-    return success;
+	string temp;
+	return temp;
 }
