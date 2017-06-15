@@ -1,11 +1,11 @@
-FLAGS = -std=c++11 -Wall -Werror -pedantic
+FLAGS = -std=c++11 -Wall -Werror -ansi -pedantic
 COMP = g++
 
 all:
 	mkdir -p ./bin
 	$(COMP) $(FLAGS) ./src/*.cpp -o ./bin/rshell
-
 rshell:
+	mkdir -p ./bin
 	$(COMP) $(FLAGS) ./src/*.cpp -o ./bin/rshell
 
 clean:
