@@ -29,10 +29,7 @@ void Pipe::execute(int in, int out) {
         }
         // close unused half of pipe
         close(pipefd[1]);
-        cout << "Entering if execute()\n";
-
         right->execute(pipefd[0], pipefd[1]);
-        cout << "Exited if execute()\n";
     } else { //parent process
         // replace stdout with pipie's output
         if(dup2(pipefd[1], 1) == -1) {
