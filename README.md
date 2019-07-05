@@ -11,16 +11,6 @@
 * Precedence works now!
 * Doesn't exit out of redirection
 
-
-### Rubric
-
-* 5 points for well commented code
-* 5 points for following style guidelines
-* 20 points for sufficient test cases
-* 20 points for input redirection <
-* 20 points for output redirection > and >>
-* 30 points for piping |
-
 ## Authors
 
 * **Andrew Cruz**
